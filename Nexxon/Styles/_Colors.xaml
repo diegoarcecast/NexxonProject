@@ -1,0 +1,36 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Styles">
+    
+    <!-- Brown -->
+    <Color x:Key="Brown50">#EFEBE9</Color>
+    <Color x:Key="Brown100">#D7CCC8</Color>
+    <Color x:Key="Brown200">#BCAAA4</Color>
+    <Color x:Key="Brown300">#A1887F</Color>
+    <Color x:Key="Brown400">#8D6E63</Color>
+    <Color x:Key="Brown500">#795548</Color>
+    <Color x:Key="Brown600">#6D4C41</Color>
+    <Color x:Key="Brown700">#5D4037</Color>
+    <Color x:Key="Brown800">#4E342E</Color>
+    <Color x:Key="Brown900">#3E2723</Color>
+
+    <!-- Gray -->
+    <Color x:Key="Gray50">#FAFAFA</Color>
+    <Color x:Key="Gray100">#F5F5F5</Color>
+    <Color x:Key="Gray200">#EEEEEE</Color>
+    <Color x:Key="Gray300">#E0E0E0</Color>
+    <Color x:Key="Gray400">#BDBDBD</Color>
+    <Color x:Key="Gray500">#9E9E9E</Color>
+    <Color x:Key="Gray600">#757575</Color>
+    <Color x:Key="Gray700">#616161</Color>
+    <Color x:Key="Gray800">#424242</Color>
+    <Color x:Key="Gray900">#212121</Color>
+
+    <!-- Black -->
+    <Color x:Key="Black">#000000</Color>
+
+    <!-- White -->
+    <Color x:Key="White">#FFFFFF</Color>
+    
+</ResourceDictionary>

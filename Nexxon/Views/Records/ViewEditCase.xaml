@@ -1,0 +1,157 @@
+﻿<Page
+    x:Class="Nexxon.Views.Records.ViewEditCase"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel x:Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="500"
+                            Spacing="20">
+
+                    <TextBlock Text="Información de caso" 
+                               Style="{StaticResource SubtitleTextBlockStyle}"
+                               VerticalAlignment="Center"/>
+                    
+                    <ScrollViewer VerticalScrollMode="Enabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="432">
+                        
+                        <StackPanel Spacing="20">
+
+                            <TextBox Name="TxtRecordNumber"
+                                     Header="Número de expediente"
+                                     PlaceholderText="Número de expediente"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Name="TxtCaseNumber"
+                                     Header="Número de caso interno"
+                                     PlaceholderText="El numero de caso se generará de manera automatica"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Name="TxtCaseFamily"
+                                     Header="Caso"
+                                     PlaceholderText="Judicial o Notarial"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Name="TxtCaseType"
+                                     Header="Tipo de caso"
+                                     PlaceholderText="Laboral, Familiar, Penal o Civil"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Name="TxtTitle"
+                                     Header="Título"
+                                     PlaceholderText="Título para el caso"
+                                     IsReadOnly="True"/>
+
+                            <TextBox x:Name="TxtSuePartyName"
+                                     Header="Nombre del demandado"
+                                     PlaceholderText="Ingrese el nombre del demandado"
+                                     IsReadOnly="True"/>
+
+                            <TextBox x:Name="TxtSuePartyID"
+                                     Header="Identificación del demandado"
+                                     PlaceholderText="Ingrese el numero de idntificación del demandado"
+                                     IsReadOnly="True"/>
+
+                            <AutoSuggestBox Name="ASBJuzgado"
+                                            Header="Juzgado"
+                                            PlaceholderText="Juzgado"
+                                            QueryIcon="Find"
+                                            IsEnabled="False"/>
+
+                            <TextBox x:Name="TxtLegalOfficeID"
+                                     Header="Número de expediente del juzgado"
+                                     PlaceholderText="Ingrese el numero de expediente del juzgado"
+                                     IsReadOnly="True"/>
+
+                            <DatePicker Name="DPStartDate"
+                                        Header="Fecha de inicio" 
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                            <DatePicker Name="DPEndDate"
+                                        Header="Seleccione la fecha de finalización" 
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Stretch"
+                                        IsEnabled="False"/>
+
+                            <TextBox Name="TxtAmount"
+                                     Header="Honorarios"
+                                     PlaceholderText="Ingrese el monto a cobrar"
+                                     IsReadOnly="True"/>
+
+                            <ListView Name="LstVPayments"
+                                      Header="Pagos realizados"
+                                      IsItemClickEnabled="False"/>
+
+                            <TextBox Name="TxtDebt"
+                                     Header="Monto adeudado"
+                                     PlaceholderText="Monto adeudado"
+                                     IsReadOnly="True"/>
+
+                            <ComboBox Name="CbxStatus"
+                                      Header="Estado de expediente"
+                                      PlaceholderText="Seleccione una opción"
+                                      HorizontalAlignment="Stretch"
+                                      IsEnabled="False">
+
+                                <ComboBoxItem Content="Elaboración"/>
+                                <ComboBoxItem Content="Entregado"/>
+                                <ComboBoxItem Content="En trámite"/>
+                                <ComboBoxItem Content="Finalizado"/>
+
+                            </ComboBox>
+
+                            <ListView Name="LstVDocuments"
+                                      Header="Archivos adjuntos"
+                                      IsItemClickEnabled="False"/>
+
+                            <Button Name="BtnAddFiles" 
+                                    Content="Añadir archivo"
+                                    HorizontalAlignment="Stretch"
+                                    Click="BtnAddFiles_Click"/>
+
+                            <TextBlock x:Name="txtAttachedFiles" 
+                                       Text=""/>
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                HorizontalAlignment="Right">
+
+                        <Button Name="BtnEditCase" 
+                                Content="Editar"
+                                Click="BtnEditCase_Click"/>
+
+                        <Button Name="BtnCancel" 
+                                Content="Cancelar"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </controls:DropShadowPanel>
+    </Grid>
+</Page>

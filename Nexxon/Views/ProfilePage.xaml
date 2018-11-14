@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="Nexxon.Views.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="400"
+                            Spacing="20">
+
+                    <TextBlock Text="Perfil" 
+                               Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <TextBox Name="TxtDNI"
+                             Header="Identificación"/>
+                    
+                    <TextBox Name="TxtName"
+                             Header="Nombre"/>
+                    
+                    <TextBox Name="TxtFirstLastName"
+                             Header="Primer Apellido"/>
+                    
+                    <TextBox Name="TxtSecondLastname"
+                             Header="Segundo Apellido"/>
+
+                    <TextBox Name="TxtPhoneNumber1"
+                             Header="Número de telefono 1"/>
+
+                    <TextBox Name="TxtPhoneNumber2"
+                             Header="Número de telefono 2"/>
+
+                    <TextBox Name="TxtAddress"
+                             Header="Dirección"/>
+
+                    <TextBox Name="TxtPosition"
+                             Header="Puesto"/>
+
+                </StackPanel>
+            </Border>
+        </controls:DropShadowPanel>
+
+        <CommandBar Grid.Row="1"
+                    OverflowButtonVisibility="Collapsed">
+            <AppBarButton Icon="Save"/>
+            <AppBarButton Icon="Edit"/>
+            <AppBarButton Icon="Cancel"/>
+        </CommandBar>
+
+    </Grid>
+</Page>

@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="Nexxon.Views.Agenda.CreateEventAgendaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Agenda"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="4"
+                                  OffsetY="4"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    CornerRadius="10"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="380"/>
+                        <ColumnDefinition Width="380"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="400"/>
+                            <RowDefinition Height="250"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"
+                                    Padding="10">
+                            <TextBlock Text="Seleccione una fecha"
+                                       Margin="5 0 5 0"
+                                       Style="{StaticResource TitleTextBlockStyle}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+
+                            <CalendarView x:Name="CreateEventAgendaCalendar"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          SelectionMode="Single"
+                                          IsGroupLabelVisible="False"
+                                          IsOutOfScopeEnabled="True"
+                                          Language="es"
+                                          CalendarIdentifier="GregorianCalendar"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"
+                                    Padding="10">
+                            <TextBlock Text="Seleccione las horas de inicio y fin"
+                                       Margin="5 0 5 0"
+                                       Style="{StaticResource TitleTextBlockStyle}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                            
+                            <TimePicker x:Name="StartTime"
+                                    Header="Inicio"
+                                    MinuteIncrement="15"
+                                    HorizontalAlignment="Center" />
+
+                            <TimePicker x:Name="EndTime"
+                                    Header="Fin"
+                                    MinuteIncrement="15"
+                                    HorizontalAlignment="Center" />
+                        </StackPanel>
+                        
+                    </Grid>
+
+                    <StackPanel Grid.Column="1"
+                                Spacing="20"
+                                Padding="10">
+                        <TextBox x:Name="txtTitulo" 
+                                 Header="Titulo"/>
+
+                        <TextBox x:Name="txtLugar" 
+                                 Header="Lugar"/>
+
+                        <StackPanel>
+                            <TextBlock Text="Enviar recordatorio"
+                                       VerticalAlignment="Center"/>
+
+                            <RadioButton x:Name="SendReminderYes"
+                                         Content="Si"
+                                         GroupName="GNreminder"/>
+
+                            <RadioButton x:Name="SendReminderNo"
+                                         Content="No"
+                                         GroupName="GNreminder"/>
+                        </StackPanel>
+
+                        <TextBox x:Name="txtDescription" 
+                                 Header="Descripción"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 Height="200"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="20"
+                                    HorizontalAlignment="Right">
+                            <Button Content="Cancelar"/>
+                            <Button Content="Agregar"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+        </controls:DropShadowPanel>
+        
+    </Grid>
+</Page>

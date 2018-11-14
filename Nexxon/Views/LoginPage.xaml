@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Nexxon.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+        <Image Source="/Assets/Images/rawpixel-1055781-unsplash.jpg" Stretch="UniformToFill"/>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  Margin="200"
+                                  ShadowOpacity="1"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="400"
+                            Spacing="20">
+                    
+                    <TextBlock Text="Inicio de sesión" 
+                               Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <TextBox Name="TxtEmail"
+                             PlaceholderText="Correo electrónico"/>
+                    
+                    <PasswordBox x:Name="PBXPassword"
+                                 PlaceholderText="Contraseña"/>
+
+                    <StackPanel Orientation="Horizontal" 
+                                Spacing="158">
+
+                        <Button x:Name="BtnForgotPassword"
+                                Style="{StaticResource TextButton}"
+                                Content="Recuperar acceso"
+                                Click="BtnForgotPassword_Click">
+                        </Button>
+
+                        <Button Name="BtnLogIn"
+                                Style="{StaticResource ContainedButton}"
+                                Content="Iniciar sesión"
+                                Click="BtnLogIn_Click"/>
+
+                    </StackPanel>
+                </StackPanel>
+
+            </Border>
+
+        </controls:DropShadowPanel>
+        <TextBlock Foreground="{ThemeResource Brown900}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="30"/>
+    </Grid>
+</Page>

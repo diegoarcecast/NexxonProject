@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="Nexxon.Views.Lawyers.Records.CheckCase"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Lawyers.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel x:Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="500"
+                            Spacing="20">
+
+                    <TextBlock Text="Información de caso" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+                    <ScrollViewer VerticalScrollMode="Enabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="420">
+                        <StackPanel Spacing="20">
+
+                            <TextBox Name="TxtCaseNumber"
+                                     Header="Número de caso interno"
+                                     PlaceholderText="Si puede ver este mensaje, contacte con el equipo de desarrollo"
+                                     IsReadOnly="True"/>
+
+                            <StackPanel Orientation="Horizontal" 
+                                        Spacing="20">
+                                <TextBlock Text="Tipo de caso" VerticalAlignment="Center"/>
+                                <TextBlock Text="Notarial o judicial" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <TextBox Name="ASBJuzgado"
+                                     Header="Juzgado"
+                                     PlaceholderText="Juzgado"/>
+
+                            <TextBox Name="TxtRecordNumber"
+                                     Header="Número de expediente"
+                                     PlaceholderText="Si puede ver este mensaje, contacte con el equipo de desarrollo"
+                                     IsReadOnly="True"/>
+
+                            <DatePicker Name="DPStartDate"
+                                        Header="Seleccione la fecha de inicio" 
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Stretch"/>
+
+                            <DatePicker Name="DPEndDate"
+                                        Header="Seleccione la fecha de finalización"
+                                        MaxWidth="500"
+                                        HorizontalAlignment="Stretch"  />
+
+                            <TextBox Name="TxtAmount"
+                                     Header="Monto"
+                                     PlaceholderText="Monto"/>
+
+                            <TextBox Name="TxtAmountOwed"
+                                     Header="Monto adeudado"
+                                     PlaceholderText="Monto"/>
+
+                            <ComboBox Name="CbxStatus"
+                                      Header="Estado de expediente"
+                                      PlaceholderText="Seleccione una opción"
+                                      HorizontalAlignment="Stretch"/>
+
+                            <ListView Name="LstVDocuments"
+                                      Header="Documentos adjuntos"/>
+
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                HorizontalAlignment="Right">
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </controls:DropShadowPanel>
+    </Grid>
+</Page>

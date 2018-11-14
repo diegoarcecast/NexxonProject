@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="Nexxon.Views.AddClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Client"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="4"
+                                  OffsetY="4"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible" MaxHeight="740">
+                <Border x:Name="MainBorder"
+                    Background="White"
+                    CornerRadius="10"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                    <StackPanel x:Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="40"
+                            Width="500"
+                            Spacing="20">
+
+                        <TextBlock Text="Registro de cliente" 
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+
+                        <StackPanel Spacing="20">
+
+                            <TextBox Name="TxtName" 
+                                 Header="Nombre"
+                                 PlaceholderText="Nombre completo del cliente"/>
+
+                            <TextBox Name="TxtLastName" 
+                                 Header="Apellidos"
+                                 PlaceholderText="Apellidos completos del cliente"/>
+
+                            <TextBlock Text="Tipo de identificación" VerticalAlignment="Center"/>
+
+                            <StackPanel Orientation="Horizontal" Spacing="20">
+                                <RadioButton Content="Nacional" GroupName="GNtypeDNI"/>
+                                <RadioButton Content="Extranjero" GroupName="GNtypeDNI"/>
+                            </StackPanel>
+
+                            <TextBox Name="TxtDNI" 
+                                 Header="Número de identificación"/>
+
+                            <TextBox Name="TxtEmail" 
+                                 Header="Correo electrónico"
+                                 PlaceholderText="Ejemplo: john@domain.com"/>
+
+                            <TextBox Name="TxtAddress" 
+                                 Header="Dirección"
+                                 PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                            <StackPanel Orientation="Horizontal" Spacing="28">
+
+                                <ComboBox Name="CbxProvince"
+                                      Header="Provincia"
+                                      Width="236"
+                                      PlaceholderText="Seleccione una provincia"/>
+
+                                <ComboBox Name="CbxCanton"
+                                      Width="236"
+                                      Header="Cantón"
+                                      PlaceholderText="Seleccione un cantón"/>
+                                
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Spacing="28">
+                                <ComboBox Name="CbxDistrict"
+                                          Header="Distrito"
+                                          PlaceholderText="Seleccione un distrito"
+                                          Width="236"/>
+                            </StackPanel>
+
+                            <TextBox Name="TxtPhoneNumber1" 
+                                 Header="Teléfono 1"
+                                 PlaceholderText="Ejemplo: 1234-5678"/>
+
+                            <TextBox Name="TxtPhoneNumber2" 
+                                 Header="Teléfono 2"
+                                 PlaceholderText="Ejemplo: 1234-5678"/>
+
+                            <StackPanel Orientation="Horizontal"
+                                    Spacing="20"
+                                    HorizontalAlignment="Right">
+                                <Button Content="Cancelar"/>
+                                <Button Content="Agregar"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                    
+                </Border>
+            </ScrollViewer>
+        </controls:DropShadowPanel>
+    </Grid>
+</Page>

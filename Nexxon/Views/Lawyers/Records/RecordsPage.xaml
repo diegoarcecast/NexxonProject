@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="Nexxon.Views.Lawyers.RecordsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Lawyers.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="400"
+                            Spacing="20">
+
+                    <TextBlock Text="Expedientes" 
+                               Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <Button Name="BtnAddRecord"
+                            Content="Añadir expediente"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnAddRecord_Click"/>
+
+                    <Button Name="BtnCheckCase"
+                            Content="Consultar expediente"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnCheckCase_Click"/>
+
+                </StackPanel>
+            </Border>
+        </controls:DropShadowPanel>
+    </Grid>
+</Page>

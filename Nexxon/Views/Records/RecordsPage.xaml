@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="Nexxon.Views.Records.RecordsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+
+        <Pivot>
+            <PivotItem x:Name="PI_CheckRecords"
+                       Header="Consultar expediente"
+                       Loaded="PI_CheckRecords_Loaded">
+
+                <Frame x:Name="CheckRecordsFrame">
+                    
+                </Frame>
+                
+            </PivotItem>
+
+            <PivotItem x:Name="PI_CreateRecords"
+                       Header="Crear expediente"
+                       Loaded="PI_CreateRecords_Loaded">
+
+                <Frame x:Name="CreateRecordsFrame">
+
+                </Frame>
+                
+            </PivotItem>
+
+        </Pivot>
+        
+    </Grid>
+</Page>

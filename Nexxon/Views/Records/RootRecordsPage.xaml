@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="Nexxon.Views.RootRecordsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <StackPanel>
+                <CommandBar IsOpen="False" OverflowButtonVisibility="Collapsed">
+                    <CommandBar.Content>
+                        <TextBlock Margin="12 14" 
+                                   FontSize="15"
+                                   Style="{StaticResource  SubheaderTextBlockStyle}">
+                            <Run Text="Expedientes"/>
+                        </TextBlock>
+                    </CommandBar.Content>
+                </CommandBar>
+                <ListView ItemClick="ListView_ItemClick"
+                          SelectionMode="None"
+                          IsItemClickEnabled="True">
+                    <ListViewItem Content=""/>
+                    <ListViewItem Content=""/>
+                    <ListViewItem Content=""/>
+                </ListView>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Frame Name="ContentPresenter"
+               Grid.Column="1">
+            <TextBlock Text="Seleccione una opción del menú"
+                       Style="{StaticResource SubheaderTextBlockStyle}"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+        </Frame>
+    </Grid>
+</Page>

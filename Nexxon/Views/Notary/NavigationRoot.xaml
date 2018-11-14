@@ -1,0 +1,84 @@
+﻿<Page
+    x:Class="Nexxon.Views.Notary.NavigationRoot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Notary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource White}">
+
+    <Grid>
+        <NavigationView Name="NavView"
+                        IsSettingsVisible="False"
+                        AlwaysShowHeader="False"
+                        PaneTitle="Nexxon Asociados">
+
+            <NavigationView.MenuItems>
+
+                <NavigationViewItem Name="NVI_Schedule" 
+                                    Content="Agenda"
+                                    Tapped="NVI_Schedule_Tapped">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE163;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItem Name="NVI_Records" 
+                                    Content="Expedientes"
+                                    Tapped="NVI_Records_Tapped">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8B7;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItem Name="NVI_Payments" 
+                                    Content="Pagos"
+                                    Tapped="NVI_Payments_Tapped">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8C7;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+            </NavigationView.MenuItems>
+            
+            <NavigationView.PaneFooter>
+                <StackPanel>
+
+                    <NavigationViewItem Name="NVI_Profile" 
+                                    Content="Perfil">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE779;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
+                    <NavigationViewItem Name="NVI_LogOut" 
+                                    Content="Cerrar sesión">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE7E8;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    
+                </StackPanel>
+
+            </NavigationView.PaneFooter>
+            <Frame Name="ContentFrame">
+                <StackPanel Spacing="20"
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center">
+
+                    <Image Height="300" 
+                           Width="300">
+                        <Image.Source>
+                            <SvgImageSource UriSource="/Assets/Images/noun_Law_1945506.svg" />
+                        </Image.Source>
+                    </Image>
+
+                    <TextBlock Text="Seleccione una opción del menu para iniciar" 
+                               Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                </StackPanel>
+            </Frame>
+        </NavigationView>
+    </Grid>
+</Page>

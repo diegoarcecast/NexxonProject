@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="Nexxon.Views.RootClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Client"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:models="using:Nexxon.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <StackPanel>
+                <CommandBar IsOpen="False" OverflowButtonVisibility="Collapsed">
+                    <CommandBar.Content>
+                        <TextBlock Margin="12 14" 
+                                   FontSize="15"
+                                   Style="{StaticResource  SubheaderTextBlockStyle}">
+                            <Run Text="Clientes"/>
+                        </TextBlock>
+                    </CommandBar.Content>
+                </CommandBar>
+                <ListView Name="MenuClient"
+                          ItemClick="MenuClient_ItemClick"
+                          SelectionMode="None"
+                          IsItemClickEnabled="True">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="MinWidth" Value="48"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RootClientItems">
+                            <Grid>
+                                <TextBlock Text="{x:Bind Name}"
+                                           ToolTipService.Placement="Right"
+                                           ToolTipService.ToolTip="{x:Bind Name}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </StackPanel>
+            
+        </Grid>
+        
+        <Frame Name="ContentFrame"
+               Grid.Column="1" 
+               Margin="8 0 0 0">
+            <TextBlock Text="Seleccione una opción del menú"
+                       Style="{StaticResource SubheaderTextBlockStyle}"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+        </Frame>
+    </Grid>
+</Page>
