@@ -30,10 +30,10 @@
                                   HorizontalAlignment="Center">
 
                         <Border x:Name="CheckAgendaBorder"
-                    Background="White"
-                    CornerRadius="10"
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center">
+                                Background="White"
+                                CornerRadius="10"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -337,7 +337,7 @@
                                     <StackPanel Orientation="Horizontal"
                                             Spacing="20"
                                             HorizontalAlignment="Right">
-                                        <Button Content="Cancelar"/>
+                                        <Button Content="Cancelar" Click="Button_Click"/>
                                         <Button Content="Agregar"/>
                                     </StackPanel>
 

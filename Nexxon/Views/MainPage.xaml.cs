@@ -30,7 +30,7 @@ namespace Nexxon.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            txtUsuario.Text = "Bienvenido " + e.Parameter.ToString();
+            //txtUsuario.Text = "Bienvenido " + e.Parameter.ToString();
         }
 
         private void NVI_Agenda_Tapped(object sender, TappedRoutedEventArgs e)

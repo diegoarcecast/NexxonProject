@@ -31,6 +31,7 @@
                     <TextBlock Text="Añadir información de caso" 
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    VerticalAlignment="Center"/>
+                    
                     <ScrollViewer VerticalScrollMode="Enabled"
                                   VerticalScrollBarVisibility="Auto"
                                   MaxHeight="432">

@@ -10,8 +10,11 @@
     Background="{ThemeResource White}">
 
     <Grid>
+
         <controls:DropShadowPanel BlurRadius="24"
                                   ShadowOpacity="0.7"
+                                  
+                                  
                                   Color="Black"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Center">
@@ -21,23 +24,54 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center">
 
-                <StackPanel Name="FormStackPanel"
+                <StackPanel x:Name="FormStackPanel"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="30"
-                            Width="400"
+                            Width="500"
                             Spacing="20">
 
-                    <TextBlock Text="Pagos" 
-                               Style="{StaticResource TitleTextBlockStyle}"
+                    <TextBlock Text="Buscar expediente"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
                                VerticalAlignment="Center"/>
 
-                    <Button Name="BtnAddPayment"
-                            Content="Añadir pago"
-                            HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="TxtName"
+                                     Header="Nombre del cliente"
+                                     PlaceholderText="Ingrese el nombre del cliente"/>
+
+                    <TextBox x:Name="TxtIdNumber"
+                             Header="Número de identificación"
+                             PlaceholderText="Ingrese el número de identificación del cliente"/>
+
+                    <Button Name="BtnSearch" 
+                            HorizontalAlignment="Right"
+                            Content="Buscar"
+                            Click="BtnSearch_Click"/>
+
+                    <TextBlock Name="TxtRecord"
+                               Text="Expediente(s): "/>
+
+                    <ListView Name="LstVCases"
+                              Header="Casos vinculados al expediente:"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                HorizontalAlignment="Right">
+
+                        <Button Name="BtnAddPayment" 
+                                Content="Agregar pago"
+                                Click="BtnAddPayment_Click"/>
+
+                        <Button Name="BtnCancel" 
+                                Content="Cancelar"
+                                Click="BtnCancel_Click"/>
+
+                    </StackPanel>
 
                 </StackPanel>
             </Border>
         </controls:DropShadowPanel>
+        
     </Grid>
+
 </Page>

@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="Nexxon.Views.Payments.AddPayment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Payments"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+
+    <Grid>
+
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  
+                                  
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="700" />
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer VerticalScrollMode="Auto"
+                              HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="700"
+                              MaxWidth="700">
+
+                        <StackPanel Margin="30"
+                                    Spacing="20">
+
+                            <TextBlock Text="Información de pago" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+
+                            <TextBox Name="TxtCaseNumber"
+                                         Header="Número de caso interno"
+                                         PlaceholderText="Número de caso interno"
+                                         IsReadOnly="True"/>
+
+                            <TextBox Name="TxtName"
+                                         Header="Nombre del cliente"
+                                         PlaceholderText="Nombre del cliente"
+                                         IsReadOnly="True"/>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="10">
+
+                                <TextBlock Text="Forma de pago"
+                                           VerticalAlignment="Center"/>
+
+                                <RadioButton x:Name="rdbtnCash" 
+                                             Content="Efectivo"
+                                             GroupName="PaymentTypeGroup"
+                                             Checked="rdbtnCash_Checked"/>
+
+                                <RadioButton x:Name="rdbtnPhysical"
+                                             Content="Bien material"
+                                             GroupName="PaymentTypeGroup"
+                                             Checked="rdbtnPhysical_Checked"/>
+
+                                <RadioButton x:Name="rdbtnCard"
+                                             Content="Tarjeta de credito o debito"
+                                             GroupName="PaymentTypeGroup"
+                                             Checked="rdbtnCard_Checked"/>
+
+                            </StackPanel>
+
+                            <TextBox Name="TxtPaymentAmount"
+                                     Header="Total a pagar"
+                                     PlaceholderText="Ingrese el monto a pagar"/>
+
+                            <TextBox Name="TxtDescription"
+                                     Header="Descripción del bien material"
+                                     PlaceholderText="Ingrese una descripción del bien material"/>
+
+                            <Button Name="BtnAddFiles" 
+                                    Content="Añadir archivo"
+                                    HorizontalAlignment="Stretch"
+                                    Click="BtnAddFiles_Click"/>
+
+                            <TextBlock x:Name="txtAttachedFiles"
+                                       Text="No hay archivos adjuntos"/>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="10"
+                                        HorizontalAlignment="Right">
+
+                                <Button Name="BtnCancel" 
+                                    Content="Cancelar"
+                                    HorizontalAlignment="Right"
+                                    Click="BtnCancel_Click"/>
+
+                                <Button Name="BtnSave" 
+                                    Content="Guardar"
+                                    HorizontalAlignment="Right"
+                                    Click="BtnSave_Click"/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                </Grid>
+
+            </Border>
+
+    </controls:DropShadowPanel>
+
+    </Grid>
+</Page>
