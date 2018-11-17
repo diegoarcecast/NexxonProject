@@ -55,7 +55,8 @@
                 <StackPanel>
 
                     <NavigationViewItem x:Name="NVI_Administration" 
-                                    Content="Administración">
+                                        Content="Administración"
+                                        Tapped="NVI_Administration_Tapped">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE713;"/>
                         </NavigationViewItem.Icon>

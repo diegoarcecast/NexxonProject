@@ -52,5 +52,10 @@ namespace Nexxon.Views
         {
             ContentFrame.Navigate(typeof(Notifications.NotificationsPage), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void NVI_Administration_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ContentFrame.Navigate(typeof(Administration.AdministrationPage), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }

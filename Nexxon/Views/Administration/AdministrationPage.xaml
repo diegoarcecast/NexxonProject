@@ -1,0 +1,382 @@
+﻿<Page
+    x:Class="Nexxon.Views.Administration.AdministrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Administration"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <Pivot>
+
+            <PivotItem Header="Agregar usuarios">
+
+                <ScrollViewer VerticalScrollMode="Auto"
+                              HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="700"
+                              MaxWidth="800">
+
+                    <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="4"
+                                  OffsetY="4"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+                        <Border x:Name="AddUser"
+                                Background="White"
+                                CornerRadius="10"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel x:Name="FormAddUser"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <TextBlock Text="Añadir información del usuario" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+
+                                <StackPanel>
+
+                                    <TextBox Name="TxtEmail"
+                                     Header="Correo electrónico"
+                                     PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+
+                                    <TextBlock Name="TxtEmailDisclaimer"
+                                               Text="Sólo se aceptan correos de Hotmail.com y Gmail.com"
+                                               HorizontalAlignment="Right"
+                                               FontSize="11"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtEmailPassword"
+                                         Header="Contraseña del correo electrónico"
+                                         PlaceholderText="Ingrese la contraseña del correo electrónico"/>
+
+                                <TextBox Name="TxtName"
+                                         Header="Nombre"
+                                         PlaceholderText="Ingrese el nombre del usuario"/>
+
+                                <TextBox Name="TxtLastName"
+                                         Header="Apellido(s)"
+                                         PlaceholderText="Ingrese el o los apellidos del funcionario"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                        Spacing="20">
+
+                                    <TextBlock Text="Tipo de identificación"
+                                               VerticalAlignment="Center"/>
+
+                                    <RadioButton Content="Nacional" 
+                                                 GroupName="GNtypeDNI"/>
+
+                                    <RadioButton Content="Extranjero" 
+                                                 GroupName="GNtypeDNI"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtID"
+                                         Header="Número de identificación"
+                                         PlaceholderText="Ingrese el numero de identificación"/>
+
+                                <TextBox Name="TxtAddress" 
+                                         Header="Dirección"
+                                         PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxProvince"
+                                              Header="Provincia"
+                                              Width="236"
+                                              PlaceholderText="Seleccione una provincia"/>
+
+                                    <ComboBox Name="CbxCanton"
+                                              Width="236"
+                                              Header="Cantón"
+                                              PlaceholderText="Seleccione un cantón"/>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" 
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxDistrict"
+                                              Header="Distrito"
+                                              PlaceholderText="Seleccione un distrito"
+                                              Width="236"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtPhoneNumber1" 
+                                         Header="Teléfono 1"
+                                         PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                <TextBox Name="TxtPhoneNumber2"
+                                         Header="Teléfono 2"
+                                         PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                <StackPanel Orientation="Horizontal" 
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxProfile"
+                                              Header="Perfil"
+                                              PlaceholderText="Seleccione un perfil"
+                                              Width="236"/>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Spacing="20">
+
+                                    <Button Name="BtnAddUser"
+                                            Content="Crear usuario"
+                                            Click="BtnAddUser_Click"/>
+
+                                    <Button Name="BtnCancel"
+                                            Content="Cancelar"
+                                            Click="BtnCancel_Click"/>
+                                    
+                                </StackPanel>
+
+                            </StackPanel>
+                            
+                        </Border>
+
+                    </controls:DropShadowPanel>
+
+                </ScrollViewer>
+                
+            </PivotItem>
+
+            <PivotItem Header="Editar usuarios">
+
+                <ScrollViewer VerticalScrollMode="Auto"
+                              HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="700"
+                              MaxWidth="800">
+
+                    <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="4"
+                                  OffsetY="4"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+                        <Border x:Name="EditUser"
+                                Background="White"
+                                CornerRadius="10"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel x:Name="FormEditUser"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <TextBlock Text="Editar información del usuario" 
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           VerticalAlignment="Center"/>
+
+                                <StackPanel>
+
+                                    <TextBox Name="TxtEmailEdit"
+                                     Header="Correo electrónico"
+                                     PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+
+                                    <TextBlock Name="TxtEmailDisclaimerEdit"
+                                               Text="Sólo se aceptan correos de Hotmail.com y Gmail.com"
+                                               HorizontalAlignment="Right"
+                                               FontSize="11"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtEmailPasswordEdit"
+                                         Header="Contraseña del correo electrónico"
+                                         PlaceholderText="Ingrese la contraseña del correo electrónico"/>
+
+                                <TextBox Name="TxtNameEdit"
+                                         Header="Nombre"
+                                         PlaceholderText="Nombre del usuario"
+                                         IsReadOnly="True"/>
+
+                                <TextBox Name="TxtLastNameEdit"
+                                         Header="Apellido(s)"
+                                         PlaceholderText="Apellido(s) del funcionario"
+                                         IsReadOnly="True"/>
+
+                                <TextBox Name="TxtIDEdit"
+                                         Header="Número de identificación"
+                                         PlaceholderText="Ingrese el numero de identificación"
+                                         IsReadOnly="True"/>
+
+                                <TextBox Name="TxtAddressEdit" 
+                                         Header="Dirección"
+                                         PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxProvinceEdit"
+                                              Header="Provincia"
+                                              Width="236"
+                                              PlaceholderText="Seleccione una provincia"/>
+
+                                    <ComboBox Name="CbxCantonEdit"
+                                              Width="236"
+                                              Header="Cantón"
+                                              PlaceholderText="Seleccione un cantón"/>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" 
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxDistrictEdit"
+                                              Header="Distrito"
+                                              PlaceholderText="Seleccione un distrito"
+                                              Width="236"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtPhoneNumber1Edit" 
+                                         Header="Teléfono 1"
+                                         PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                <TextBox Name="TxtPhoneNumber2Edit"
+                                         Header="Teléfono 2"
+                                         PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                <StackPanel Orientation="Horizontal" 
+                                            Spacing="28">
+
+                                    <ComboBox Name="CbxProfileEdit"
+                                              Header="Perfil"
+                                              PlaceholderText="Seleccione un perfil"
+                                              Width="236"/>
+
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Spacing="20">
+
+                                    <Button Name="BtnEditUser"
+                                            Content="Editar usuario"
+                                            Click="BtnEditUser_Click"/>
+
+                                    <Button Name="BtnCancelEdit"
+                                            Content="Cancelar"
+                                            Click="BtnCancelEdit_Click"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </controls:DropShadowPanel>
+
+                </ScrollViewer>
+
+            </PivotItem>
+
+            <PivotItem Header="Cambiar contraseña">
+
+                <ScrollViewer VerticalScrollMode="Auto"
+                              HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="700"
+                              MaxWidth="800">
+
+                    <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  OffsetX="4"
+                                  OffsetY="4"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+                        <Border x:Name="ChangePassword"
+                                Background="White"
+                                CornerRadius="10"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel x:Name="FormChangePassword"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <StackPanel Spacing="20">
+
+                                    <TextBox Name="TxtEmailChangePassword"
+                                             Header="Correo electrónico"
+                                             PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+
+                                    <Button Name="BtnSearch"
+                                            Content="Buscar usuario"
+                                            HorizontalAlignment="Stretch"
+                                            Click="BtnSearch_Click"/>
+
+                                    <TextBlock Text="Usuario encontrado / Usuario no encontrado"
+                                               VerticalAlignment="Center"/>
+
+                                </StackPanel>
+
+                                <TextBox Name="TxtNewPassword"
+                                         Header="Contraseña"
+                                         PlaceholderText="Ingrese la nueva contraseña"/>
+
+                                <TextBox Name="TxtConfirmNewPassword"
+                                         Header="Confirme la contraseña"
+                                         PlaceholderText="Vuelva a ingresar la nueva contraseña"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Right"
+                                            Spacing="20">
+
+                                    <Button Name="BtnChangePassword"
+                                            Content="Cambiar contraseña"
+                                            Click="BtnChangePassword_Click"/>
+
+                                    <Button Name="BtnCancelChangePassword"
+                                            Content="Cancelar"
+                                            Click="BtnCancelChangePassword_Click"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </controls:DropShadowPanel>
+
+                </ScrollViewer>
+
+            </PivotItem>
+
+        </Pivot>
+
+    </Grid>
+</Page>

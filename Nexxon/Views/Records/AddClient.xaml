@@ -48,13 +48,18 @@
                                      Header="Segundo apellido"
                                      PlaceholderText="Segundo apellido del cliente"/>
 
-                            <StackPanel Orientation="Horizontal" Spacing="20">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="20">
+                                
                                 <TextBlock Text="Tipo de identificación"
                                            VerticalAlignment="Center"/>
+                                
                                 <RadioButton Content="Nacional" 
                                              GroupName="GNtypeDNI"/>
+                                
                                 <RadioButton Content="Extranjero" 
                                              GroupName="GNtypeDNI"/>
+                                
                             </StackPanel>
 
                             <TextBox Name="TxtDNI" 
@@ -63,7 +68,7 @@
 
                             <TextBox Name="TxtEmail" 
                                      Header="Correo electrónico"
-                                     PlaceholderText="Ejemplo: john@domain.com"/>
+                                     PlaceholderText="Ejemplo: ejemplo@domain.com"/>
 
                             <TextBox Name="TxtAddress" 
                                      Header="Dirección"
@@ -112,7 +117,7 @@
                                 Click="BtnAddClient_Click"/>
                         
                         <Button Name="BtnCancel"
-                                Content="Cancelar"/>
+                                Content="Cancelar" Click="BtnCancel_Click"/>
                     </StackPanel>
 
                 </StackPanel>

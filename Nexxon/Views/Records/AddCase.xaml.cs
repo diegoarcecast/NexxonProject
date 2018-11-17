@@ -7,6 +7,8 @@ namespace Nexxon.Views.Records
     using System;
     //using Windows.UI.Popups;
     using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Media.Animation;
+
     //using Windows.UI.Xaml.Media.Animation;
 
     public sealed partial class AddCase : Page
@@ -74,6 +76,11 @@ namespace Nexxon.Views.Records
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             rdbtnNotary.IsChecked = true;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
         }
     }
 }

@@ -141,7 +141,7 @@
                                 Content="Crear caso"/>
                         
                         <Button Name="BtnCancel" 
-                                Content="Cancelar"/>
+                                Content="Cancelar" Click="BtnCancel_Click"/>
                     </StackPanel>
 
                 </StackPanel>

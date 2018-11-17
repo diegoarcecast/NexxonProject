@@ -29,5 +29,10 @@ namespace Nexxon.Views.Records
             }
 
         }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }
