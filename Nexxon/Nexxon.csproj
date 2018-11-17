@@ -111,6 +111,12 @@
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Notifications\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notifications\SendNotification.xaml.cs">
+      <DependentUpon>SendNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Payments\AddPayment.xaml.cs">
       <DependentUpon>AddPayment.xaml</DependentUpon>
     </Compile>
@@ -199,6 +205,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Notifications\NotificationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Notifications\SendNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Payments\AddPayment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,7 +290,6 @@
     <Folder Include="Parameters\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\Notifications\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
