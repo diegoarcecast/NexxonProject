@@ -1,0 +1,157 @@
+﻿<Page
+    x:Class="Nexxon.Views.Records.EditClient"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Records"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+
+            <Border x:Name="MainBorder"
+                    Background="White"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+
+                <StackPanel x:Name="FormStackPanel"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="30"
+                            Width="500"
+                            Spacing="20">
+
+                    <TextBlock Text="Editar información del cliente" 
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   VerticalAlignment="Center"/>
+                    <ScrollViewer VerticalScrollMode="Enabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="432">
+                        
+                        <StackPanel Spacing="20">
+
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <AutoSuggestBox Name="ASBAllRecords" 
+                                                Header="Nombre o número de identificación"
+                                                PlaceholderText="Buscar expediente"
+                                                QueryIcon="Find"/>
+
+                                <TextBlock Name="TxtRecord"
+                                           Text="Numero de expediente: "/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="20"
+                                            HorizontalAlignment="Right">
+
+                                    <Button Name="BtnSearchClient" 
+                                            Content="Buscar"
+                                            Click="BtnSearchClient_Click"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                            <TextBox Name="TxtName" 
+                                     Header="Nombre"
+                                     PlaceholderText="Nombre completo del cliente"/>
+
+                            <TextBox Name="TxtFirstLastName" 
+                                     Header="Primer apellido"
+                                     PlaceholderText="Primer apellido del cliente"/>
+
+                            <TextBox Name="TxtSecondLastName" 
+                                     Header="Segundo apellido"
+                                     PlaceholderText="Segundo apellido del cliente"/>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="20">
+
+                                <TextBlock Text="Tipo de identificación"
+                                           VerticalAlignment="Center"/>
+
+                                <RadioButton Content="Nacional" 
+                                             GroupName="GNtypeDNI"
+                                             IsEnabled="False"/>
+
+                                <RadioButton Content="Extranjero" 
+                                             GroupName="GNtypeDNI"
+                                             IsEnabled="False"/>
+
+                            </StackPanel>
+
+                            <TextBox Name="TxtDNI" 
+                                     Header="Número de identificación"
+                                     PlaceholderText="Cédula, pasaporte, cédula de residencia"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Name="TxtEmail" 
+                                     Header="Correo electrónico"
+                                     PlaceholderText="Ejemplo: ejemplo@domain.com"/>
+
+                            <TextBox Name="TxtAddress" 
+                                     Header="Dirección"
+                                     PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                            <StackPanel Orientation="Horizontal" Spacing="28">
+
+                                <ComboBox Name="CbxProvince"
+                                      Header="Provincia"
+                                      Width="236"
+                                      PlaceholderText="Seleccione una provincia"/>
+
+                                <ComboBox Name="CbxCanton"
+                                      Width="236"
+                                      Header="Cantón"
+                                      PlaceholderText="Seleccione un cantón"/>
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" 
+                                        Spacing="28">
+                                <ComboBox Name="CbxDistrict"
+                                          Header="Distrito"
+                                          PlaceholderText="Seleccione un distrito"
+                                          Width="236"/>
+                            </StackPanel>
+
+                            <TextBox Name="TxtPhoneNumber1" 
+                                     Header="Teléfono 1"
+                                     PlaceholderText="Ejemplo: 1234-5678"/>
+
+                            <TextBox Name="TxtPhoneNumber2"
+                                     Header="Teléfono 2"
+                                     PlaceholderText="Ejemplo: 1234-5678"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                HorizontalAlignment="Right">
+
+                        <Button Name="BtnEditClient"
+                                Content="Editar expediente"
+                                ToolTipService.ToolTip="Crear cliente y proceder a crear caso"
+                                Click="BtnEditClient_Click"/>
+
+                        <Button Name="BtnCancel"
+                                Content="Cancelar"
+                                Click="BtnCancel_Click"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </controls:DropShadowPanel>
+    </Grid>
+</Page>

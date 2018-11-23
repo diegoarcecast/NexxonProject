@@ -48,7 +48,11 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="20"
                                 HorizontalAlignment="Right">
-                        
+
+                        <Button Name="BtnCancel" 
+                                Content="Cancelar"
+                                Click="BtnCancel_Click"/>
+
                         <Button Name="BtnUpdateCase" 
                                 Content="Actualizar caso"
                                 Click="BtnUpdateCase_Click"/>

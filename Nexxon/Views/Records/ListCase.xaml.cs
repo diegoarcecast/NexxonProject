@@ -21,5 +21,10 @@ namespace Nexxon.Views.Records
         {
             Frame.Navigate(typeof(Records.ViewEditCase), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -73,7 +73,7 @@
 
             </NavigationView.PaneFooter>
 
-            <Frame Name="ContentFrame">
+            <Frame x:Name="ContentFrame">
                 <StackPanel Spacing="20"
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center">

@@ -141,6 +141,9 @@
     <Compile Include="Views\Records\CheckCase.xaml.cs">
       <DependentUpon>CheckCase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Records\EditClient.xaml.cs">
+      <DependentUpon>EditClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Records\ListCase.xaml.cs">
       <DependentUpon>ListCase.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
     <Page Include="Views\Records\CheckCase.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Records\EditClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Records\ListCase.xaml">
       <Generator>MSBuild:Compile</Generator>

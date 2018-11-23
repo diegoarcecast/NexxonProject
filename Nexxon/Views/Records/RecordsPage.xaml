@@ -32,6 +32,16 @@
                 
             </PivotItem>
 
+            <PivotItem x:Name="PI_UpdateRecords"
+                       Header="Editar expediente"
+                       Loaded="PI_UpdateRecords_Loaded">
+
+                <Frame x:Name="UpdateRecordsFrame">
+
+                </Frame>
+
+            </PivotItem>
+
         </Pivot>
         
     </Grid>

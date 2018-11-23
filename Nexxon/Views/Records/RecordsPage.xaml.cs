@@ -21,5 +21,10 @@ namespace Nexxon.Views.Records
         {
             CreateRecordsFrame.Navigate(typeof(Records.AddClient), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void PI_UpdateRecords_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateRecordsFrame.Navigate(typeof(Records.EditClient), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }
