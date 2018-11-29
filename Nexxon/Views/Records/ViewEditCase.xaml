@@ -10,23 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
     <Grid>
-        <controls:DropShadowPanel BlurRadius="24"
-                                  ShadowOpacity="0.7"
-                                  Color="Black"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center">
 
-            <Border x:Name="MainBorder"
-                    Background="White"
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center">
-
-                <StackPanel x:Name="FormStackPanel"
+        <StackPanel x:Name="FormStackPanel"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Margin="30"
-                            Width="500"
-                            Spacing="20">
+                            Width="500">
 
                     <TextBlock Text="Información de caso" 
                                Style="{StaticResource SubtitleTextBlockStyle}"
@@ -130,7 +118,8 @@
                             <Button Name="BtnAddFiles" 
                                     Content="Añadir archivo"
                                     HorizontalAlignment="Stretch"
-                                    Click="BtnAddFiles_Click"/>
+                                    Click="BtnAddFiles_Click"
+                                    IsEnabled="False"/>
 
                             <TextBlock x:Name="txtAttachedFiles" 
                                        Text=""/>
@@ -142,16 +131,21 @@
                                 Spacing="20"
                                 HorizontalAlignment="Right">
 
-                        <Button Name="BtnEditCase" 
+                <Button Name="BtnSaveCase" 
+                                Content="Guardar"
+                                Click="BtnSaveCase_Click"
+                                Visibility="Collapsed"/>
+
+                <Button Name="BtnEditCase" 
                                 Content="Editar"
                                 Click="BtnEditCase_Click"/>
 
                         <Button Name="BtnCancel" 
-                                Content="Cancelar"/>
+                                Content="Cancelar"
+                                Click="BtnCancel_Click"/>
                     </StackPanel>
 
                 </StackPanel>
-            </Border>
-        </controls:DropShadowPanel>
+
     </Grid>
 </Page>

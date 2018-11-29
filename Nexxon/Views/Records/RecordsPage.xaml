@@ -11,34 +11,362 @@
 
     <Grid>
 
-        <Pivot>
+        <Pivot x:Name="Pivot_Records">
+            
             <PivotItem x:Name="PI_CheckRecords"
                        Header="Consultar expediente"
                        Loaded="PI_CheckRecords_Loaded">
 
-                <Frame x:Name="CheckRecordsFrame">
-                    
-                </Frame>
-                
+                <Grid>
+                    <controls:DropShadowPanel BlurRadius="24"
+                                              ShadowOpacity="0.7"
+                                              Color="Black"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
+
+                        <Border x:Name="MainBorder"
+                                Background="White"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel x:Name="FormStackPanel"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <TextBlock Text="Consultar expediente" 
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           VerticalAlignment="Center"/>
+
+                                <AutoSuggestBox Name="ASBAllRecords" 
+                                                Header="Nombre o número de identificación"
+                                                PlaceholderText="Buscar expediente"
+                                                QueryIcon="Find"/>
+
+                                <TextBlock Name="TxtRecord"
+                                           Text="Numero de expediente: "/>
+
+                                <ListView Name="LstVCases"
+                                          Header="Casos vinculados al expediente"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="20"
+                                            HorizontalAlignment="Right">
+
+                                    <Button Name="BtnCancel" 
+                                            Content="Cancelar"
+                                            Click="BtnCancel_Click"/>
+
+                                    <Button Name="BtnUpdateCase" 
+                                            Content="Consultar caso"
+                                            Click="BtnUpdateCase_Click"/>
+
+                                    <Button Name="BtnCreateCase" 
+                                            Content="Caso nuevo"
+                                            Click="BtnCreateCase_Click"/>
+
+                                </StackPanel>
+
+                                <Frame x:Name="CheckRecordsFrame">
+
+                                </Frame>
+
+                            </StackPanel>
+                        </Border>
+                    </controls:DropShadowPanel>
+                </Grid>
+
             </PivotItem>
 
             <PivotItem x:Name="PI_CreateRecords"
                        Header="Crear expediente"
                        Loaded="PI_CreateRecords_Loaded">
 
-                <Frame x:Name="CreateRecordsFrame">
+                <Grid>
+                    <controls:DropShadowPanel BlurRadius="24"
+                                  ShadowOpacity="0.7"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
 
-                </Frame>
-                
+                        <Border x:Name="MainBorderAddRecord"
+                                Background="White"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <TextBlock Text="Añadir información de cliente" 
+                                        Style="{StaticResource SubtitleTextBlockStyle}"
+                                        VerticalAlignment="Center"/>
+
+                                    <ScrollViewer VerticalScrollMode="Enabled"
+                                            VerticalScrollBarVisibility="Auto"
+                                            MaxHeight="432">
+
+                                        <StackPanel Spacing="20">
+
+                                            <TextBox Name="TxtName" 
+                                                Header="Nombre"
+                                                PlaceholderText="Nombre completo del cliente"/>
+
+                                            <TextBox Name="TxtFirstLastName" 
+                                                Header="Primer apellido"
+                                                PlaceholderText="Primer apellido del cliente"/>
+
+                                            <TextBox Name="TxtSecondLastName" 
+                                                Header="Segundo apellido"
+                                                PlaceholderText="Segundo apellido del cliente"/>
+
+                                            <StackPanel Orientation="Horizontal"
+                                                Spacing="20">
+
+                                                <TextBlock Text="Tipo de identificación"
+                                                    VerticalAlignment="Center"/>
+
+                                                <RadioButton Content="Nacional" 
+                                                        GroupName="GNtypeDNI"/>
+
+                                                <RadioButton Content="Extranjero" 
+                                                        GroupName="GNtypeDNI"/>
+
+                                            </StackPanel>
+
+                                            <TextBox Name="TxtDNI" 
+                                                Header="Número de identificación"
+                                                PlaceholderText="Cédula, pasaporte, cédula de residencia"/>
+
+                                            <TextBox Name="TxtEmail" 
+                                                Header="Correo electrónico"
+                                                PlaceholderText="Ejemplo: ejemplo@domain.com"/>
+
+                                            <TextBox Name="TxtAddress" 
+                                                Header="Dirección"
+                                                PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                                            <StackPanel Orientation="Horizontal"
+                                                Spacing="28">
+
+                                                <ComboBox Name="CbxProvince"
+                                                    Header="Provincia"
+                                                    Width="236"
+                                                    PlaceholderText="Seleccione una provincia"/>
+
+                                                <ComboBox Name="CbxCanton"
+                                                    Width="236"
+                                                    Header="Cantón"
+                                                    PlaceholderText="Seleccione un cantón"/>
+
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal" 
+                                                Spacing="28">
+
+                                                <ComboBox Name="CbxDistrict"
+                                                    Header="Distrito"
+                                                    PlaceholderText="Seleccione un distrito"
+                                                    Width="236"/>
+
+                                            </StackPanel>
+
+                                            <TextBox Name="TxtPhoneNumber1" 
+                                                Header="Teléfono 1"
+                                                PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                            <TextBox Name="TxtPhoneNumber2"
+                                                Header="Teléfono 2"
+                                                PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                        </StackPanel>
+
+                                    </ScrollViewer>
+
+                                    <StackPanel Orientation="Horizontal"
+                                        Spacing="20"
+                                        HorizontalAlignment="Right">
+
+                                        <Button Name="BtnAddRecord"
+                                        Content="Crear expediente"
+                                        ToolTipService.ToolTip="Crear cliente y proceder a crear caso"
+                                        Click="BtnAddRecord_Click"/>
+
+                                        <Button Name="BtnAddRecordCancel"
+                                        Content="Cancelar"
+                                        Click="BtnAddRecordCancel_Click"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                        </Border>
+                        
+                    </controls:DropShadowPanel>
+                    
+                </Grid>
+
             </PivotItem>
 
             <PivotItem x:Name="PI_UpdateRecords"
                        Header="Editar expediente"
                        Loaded="PI_UpdateRecords_Loaded">
 
-                <Frame x:Name="UpdateRecordsFrame">
+                <Grid x:Name="MainGrid">
+                    
+                    <controls:DropShadowPanel BlurRadius="24"
+                                              ShadowOpacity="0.7"
+                                              Color="Black"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
 
-                </Frame>
+                        <Border x:Name="MainBorder_EditRecord"
+                                Background="White"
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center">
+
+                            <StackPanel x:Name="FormStackPanel_EditRecord"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Margin="30"
+                                        Width="500"
+                                        Spacing="20">
+
+                                <TextBlock Text="Editar información del cliente" 
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           VerticalAlignment="Center"/>
+                                
+                                <ScrollViewer VerticalScrollMode="Enabled"
+                                              VerticalScrollBarVisibility="Auto"
+                                              MaxHeight="432">
+
+                                    <StackPanel Spacing="20">
+
+                                        <StackPanel VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Width="500"
+                                                    Spacing="20">
+
+                                            <AutoSuggestBox Name="ASBAllRecords_EditRecord" 
+                                                            Header="Nombre o número de identificación"
+                                                            PlaceholderText="Buscar expediente"
+                                                            QueryIcon="Find"/>
+
+                                            <TextBlock x:Name="TxtRecord_EditRecord"
+                                                       Text="Numero de expediente: "/>
+
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="20"
+                                                        HorizontalAlignment="Right">
+
+                                                <Button x:Name="BtnSearchClient_EditRecord" 
+                                                        Content="Buscar"
+                                                        Click="BtnEditRecordSearchClient_Click"/>
+
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                        <TextBox x:Name="TxtName_EditRecord" 
+                                                 Header="Nombre"
+                                                 PlaceholderText="Nombre completo del cliente"/>
+
+                                        <TextBox x:Name="TxtFirstLastName_EditRecord" 
+                                                 Header="Primer apellido"
+                                                 PlaceholderText="Primer apellido del cliente"/>
+
+                                        <TextBox x:Name="TxtSecondLastName_EditRecord" 
+                                                 Header="Segundo apellido"
+                                                 PlaceholderText="Segundo apellido del cliente"/>
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="20">
+
+                                            <TextBlock Text="Tipo de identificación"
+                                                       VerticalAlignment="Center"/>
+
+                                            <RadioButton Content="Nacional" 
+                                                         GroupName="GNtypeDNI"
+                                                         IsEnabled="False"/>
+
+                                            <RadioButton Content="Extranjero_EditRecord" 
+                                                         GroupName="GNtypeDNI"
+                                                         IsEnabled="False"/>
+
+                                        </StackPanel>
+
+                                        <TextBox Name="TxtDNI_EditRecord" 
+                                                 Header="Número de identificación"
+                                                 PlaceholderText="Cédula, pasaporte, cédula de residencia"
+                                                 IsReadOnly="True"/>
+
+                                        <TextBox Name="TxtEmail_EditRecord" 
+                                                 Header="Correo electrónico"
+                                                 PlaceholderText="Ejemplo: ejemplo@domain.com"/>
+
+                                        <TextBox Name="TxtAddress_EditRecord" 
+                                                 Header="Dirección"
+                                                 PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+
+                                        <StackPanel Orientation="Horizontal" Spacing="28">
+
+                                            <ComboBox Name="CbxProvince_EditRecord"
+                                                      Header="Provincia"
+                                                      Width="236"
+                                                      PlaceholderText="Seleccione una provincia"/>
+
+                                            <ComboBox Name="CbxCanton_EditRecord"
+                                                      Width="236"
+                                                      Header="Cantón"
+                                                      PlaceholderText="Seleccione un cantón"/>
+
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal" 
+                                                    Spacing="28">
+                                            
+                                            <ComboBox Name="CbxDistrict_EditRecord"
+                                                      Header="Distrito"
+                                                      PlaceholderText="Seleccione un distrito"
+                                                      Width="236"/>
+                                            
+                                        </StackPanel>
+
+                                        <TextBox x:Name="TxtPhoneNumber1_EditRecord" 
+                                                 Header="Teléfono 1"
+                                                 PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                        <TextBox x:Name="TxtPhoneNumber2_EditRecord"
+                                                 Header="Teléfono 2"
+                                                 PlaceholderText="Ejemplo: 1234-5678"/>
+
+                                    </StackPanel>
+                                    
+                                </ScrollViewer>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="20"
+                                            HorizontalAlignment="Right">
+
+                                    <Button x:Name="BtnEditRecord"
+                                            Content="Editar expediente"
+                                            ToolTipService.ToolTip="Crear cliente y proceder a crear caso"
+                                            Click="BtnEditRecord_Click"/>
+
+                                    <Button x:Name="BtnEditRecordCancel"
+                                            Content="Cancelar"
+                                            Click="BtnEditRecordCancel_Click"/>
+                                    
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </controls:DropShadowPanel>
+                </Grid>
 
             </PivotItem>
 

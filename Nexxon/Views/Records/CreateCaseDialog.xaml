@@ -1,23 +1,23 @@
-﻿<Page
-    x:Class="Nexxon.Views.Records.AddCase"
+﻿<ContentDialog
+    x:Class="Nexxon.Views.Records.CreateCaseDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Nexxon.Views.Records"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource White}" Loaded="Page_Loaded">
+    Title="Añadir información de caso"
+    PrimaryButtonText="Crear caso"
+    SecondaryButtonText="Cancelar"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
     <Grid>
+
         <StackPanel x:Name="FormStackPanel"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Width="500">
-
-            <TextBlock Text="Añadir información de caso" 
-                                   Style="{StaticResource SubtitleTextBlockStyle}"
-                                   VerticalAlignment="Center"/>
 
             <ScrollViewer VerticalScrollMode="Enabled"
                                   VerticalScrollBarVisibility="Auto"
@@ -25,25 +25,25 @@
                 <StackPanel Spacing="20">
 
                     <TextBox Name="TxtRecordNumber"
-                                     Header="Número de expediente"
-                                     PlaceholderText="Número de expediente"
-                                     IsReadOnly="True"/>
+                             Header="Número de expediente"
+                             PlaceholderText="Número de expediente"
+                             IsReadOnly="True"/>
 
                     <TextBox Name="TxtCaseNumber"
-                                     Header="Número de caso interno"
-                                     PlaceholderText="El numero de caso se generará de manera automatica"
-                                     IsReadOnly="True"/>
+                             Header="Número de caso interno"
+                             PlaceholderText="El numero de caso se generará de manera automatica"
+                             IsReadOnly="True"/>
 
                     <StackPanel Orientation="Horizontal" 
-                                        Spacing="20">
+                                Spacing="20">
 
                         <TextBlock Text="Tipo de caso"
-                                           VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <RadioButton x:Name="rdbtnNotary" 
-                                             Content="Notarial"
-                                             GroupName="CaseGroup"
-                                             Checked="rdbtnNotary_Checked"/>
+                                     Content="Notarial"
+                                     GroupName="CaseGroup"
+                                     Checked="rdbtnNotary_Checked"/>
 
                         <RadioButton x:Name="rdbtnJudicial"
                                              Content="Judicial"
@@ -120,17 +120,7 @@
 
             </ScrollViewer>
 
-            <StackPanel Orientation="Horizontal"
-                                Spacing="20"
-                                HorizontalAlignment="Right">
-
-                <Button Name="BtnAddCase" 
-                                Content="Crear caso"/>
-
-                <Button Name="BtnCancel" 
-                                Content="Cancelar" Click="BtnCancel_Click"/>
-            </StackPanel>
-
         </StackPanel>
+        
     </Grid>
-</Page>
+</ContentDialog>

@@ -1,21 +1,38 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Nexxon.Views.Records
 {
-    using System.Text;
-    using Windows.UI.Xaml.Controls;
-    using System;
-    //using Windows.UI.Popups;
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Media.Animation;
-
-    //using Windows.UI.Xaml.Media.Animation;
-
-    public sealed partial class AddCase : Page
+    public sealed partial class CreateCaseDialog : ContentDialog
     {
-        public AddCase()
+        public CreateCaseDialog()
         {
             this.InitializeComponent();
+        }
+
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
+        }
+
+        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+
         }
 
         private void rdbtnNotary_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -74,11 +91,6 @@ namespace Nexxon.Views.Records
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             rdbtnNotary.IsChecked = true;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Content = null;
         }
     }
 }

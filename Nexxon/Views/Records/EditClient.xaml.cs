@@ -35,7 +35,7 @@ namespace Nexxon.Views.Records
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            //Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
         }
 
         private void BtnSearchClient_Click(object sender, RoutedEventArgs e)

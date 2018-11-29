@@ -56,6 +56,13 @@ namespace Nexxon.Views.Records
         private void BtnEditCase_Click(object sender, RoutedEventArgs e)
         {
             TxtTitle.IsReadOnly = false;
+            ASBJuzgado.IsEnabled = true;
+            TxtLegalOfficeID.IsReadOnly = false;
+            DPEndDate.IsEnabled = true;
+            TxtAmount.IsReadOnly = false;
+            CbxStatus.IsEnabled = true;
+            BtnAddFiles.IsEnabled = true;
+            BtnSaveCase.Visibility = Visibility.Visible;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -68,6 +75,16 @@ namespace Nexxon.Views.Records
                 ASBJuzgado.Visibility = Visibility.Collapsed;
                 TxtLegalOfficeID.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Content = null;
+        }
+
+        private void BtnSaveCase_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
