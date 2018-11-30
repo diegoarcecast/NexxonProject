@@ -26,5 +26,10 @@ namespace Nexxon.Views.Payments
         {
             Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
         }
+
+        private void BtnEditPayment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EditPayment), null, new DrillInNavigationTransitionInfo());
+        }
     }
 }
