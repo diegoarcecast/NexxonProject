@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource White}">
+    Background="{ThemeResource White}" Loaded="Page_Loaded">
 
     <Grid>
 
@@ -57,6 +57,10 @@
                     <StackPanel Orientation="Horizontal"
                                 Spacing="20"
                                 HorizontalAlignment="Right">
+
+                        <Button Name="BtnDeletePayment" 
+                                Content="Anular pago"
+                                Click="BtnDeletePayment_Click"/>
 
                         <Button Name="BtnEditPayment" 
                                 Content="Editar pago"

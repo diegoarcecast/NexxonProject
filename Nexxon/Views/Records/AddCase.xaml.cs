@@ -5,17 +5,31 @@ namespace Nexxon.Views.Records
     using System.Text;
     using Windows.UI.Xaml.Controls;
     using System;
-    //using Windows.UI.Popups;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Media.Animation;
-
-    //using Windows.UI.Xaml.Media.Animation;
+    using Nexxon.Models.Security;
+    using Nexxon.ViewModels.Security;
+    using Windows.UI.Xaml.Navigation;
 
     public sealed partial class AddCase : Page
     {
+        private String profile;
+
         public AddCase()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AutorizationModel obj_AutorizationModel = new AutorizationModel();
+            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+
+            this.profile = e.Parameter.ToString();
+
+            obj_AutorizationModel._sPrifle = this.profile;
+
+            obj_AuthorizationViewModel.CreateCasePermissions(ref obj_AutorizationModel);
         }
 
         private void rdbtnNotary_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)

@@ -17,10 +17,10 @@
         <ComboBox Name="CbxAccounts"
                   PlaceholderText="Seleccione un tipo de cuenta"
                   HorizontalAlignment="Stretch">
-            <ComboBoxItem Content="Administrator"/>
-            <ComboBoxItem Content="Lawyer"/>
-            <ComboBoxItem Content="Notary"/>
-            <ComboBoxItem Content="Reception"/>
+            <ComboBoxItem Content="Administrador"/>
+            <ComboBoxItem Content="Abogado"/>
+            <ComboBoxItem Content="Notario"/>
+            <ComboBoxItem Content="Asistente"/>
         </ComboBox>
     </Grid>
 </ContentDialog>

@@ -48,5 +48,21 @@ namespace Nexxon
             var deferral = e.SuspendingOperation.GetDeferral();
             deferral.Complete();
         }
+
+        #region Connection String
+        private string connectionString =
+            "SERVER = GREIVIN; DATABASE = DB_BUFFET_NEXXON; USER ID = sa; PASSWORD = N3xx0n";
+
+        public string ConnectionString { get => connectionString; set => connectionString = value; }
+        #endregion
+
+        #region DB Params
+        private string spAuthentication = "spAutenticarUsuario";
+        public string SpAuthentication { get => spAuthentication; set => spAuthentication = value; }
+
+        private string tblAuthentication = "T_USUARIO";
+        public string TblAuthentication { get => tblAuthentication; set => tblAuthentication = value; }
+        #endregion
+
     }
 }

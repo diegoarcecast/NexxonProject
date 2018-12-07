@@ -37,7 +37,7 @@
 
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="340"/>
+                                    <RowDefinition Height="330"/>
                                     <RowDefinition Height="310"/>
                                 </Grid.RowDefinitions>
 
@@ -47,16 +47,28 @@
                                         <ColumnDefinition Width="380"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <StackPanel>
+
+                                        <ComboBox x:Name="CbxUser"
+                                              Header="Usuario"
+                                              PlaceholderText="Seleccione un usuario"
+                                              HorizontalAlignment="Stretch"
+                                              Grid.Column="0"
+                                              Grid.Row="0" />
+
                                     <CalendarView x:Name="DetailsAgendaCalendar"
-                                                  VerticalAlignment="Center"
+                                                  Height="260"
+                                                  VerticalAlignment="Stretch"
                                                   HorizontalAlignment="Center"
                                                   SelectionMode="Single"
                                                   IsGroupLabelVisible="False"
                                                   IsOutOfScopeEnabled="True"
-                                                  Language="es"
+                                                  Language="Es"
                                                   CalendarIdentifier="GregorianCalendar"
                                                   Margin="0,0,0,0"
                                                   Grid.RowSpan="2"/>
+
+                                    </StackPanel>
 
                                     <ScrollViewer VerticalScrollMode="Auto"
                                                   HorizontalScrollMode="Auto"

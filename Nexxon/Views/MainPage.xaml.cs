@@ -23,6 +23,8 @@ namespace Nexxon.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private String profile;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -30,22 +32,22 @@ namespace Nexxon.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //txtUsuario.Text = "Bienvenido " + e.Parameter.ToString();
+            this.profile = e.Parameter.ToString();
         }
 
         private void NVI_Agenda_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Agenda.AgendaPage), null, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Agenda.AgendaPage), profile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Records_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Records.RecordsPage), null, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Records.RecordsPage), profile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Payments_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Payments.PaymentsPage), null, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Payments.PaymentsPage), profile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Notifications_Tapped(object sender, TappedRoutedEventArgs e)
@@ -55,7 +57,7 @@ namespace Nexxon.Views
 
         private void NVI_Administration_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Administration.AdministrationPage), null, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Administration.AdministrationPage), profile, new DrillInNavigationTransitionInfo());
         }
     }
 }

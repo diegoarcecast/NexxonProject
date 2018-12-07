@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource White}">
+    Background="{ThemeResource White}" Loaded="Page_Loaded">
 
     <Grid>
         <Image Source="/Assets/Images/rawpixel-1055781-unsplash.jpg" Stretch="UniformToFill"/>
@@ -32,6 +32,11 @@
                     
                     <TextBlock Text="Inicio de sesión" 
                                Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock x:Name="TxtError"
+                               Text="Error: Usuario o contraseña incorrectos!"
+                               Foreground="Red"
                                VerticalAlignment="Center"/>
 
                     <TextBox Name="TxtEmail"

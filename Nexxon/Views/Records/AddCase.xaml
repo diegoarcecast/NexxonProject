@@ -21,7 +21,7 @@
 
             <ScrollViewer VerticalScrollMode="Enabled"
                                   VerticalScrollBarVisibility="Auto"
-                                  MaxHeight="432">
+                                  MaxHeight="260">
                 <StackPanel Spacing="20">
 
                     <TextBox Name="TxtRecordNumber"

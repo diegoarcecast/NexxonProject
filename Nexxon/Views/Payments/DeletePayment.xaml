@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="Nexxon.Views.Payments.DeletePayment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nexxon.Views.Payments"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <ScrollViewer VerticalScrollMode="Auto"
+                              HorizontalScrollMode="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              MaxHeight="700"
+                              MaxWidth="800">
+
+            <controls:DropShadowPanel BlurRadius="24"
+                                      ShadowOpacity="0.7"
+                                  
+                                  
+                                      Color="Black"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center">
+
+                <Border x:Name="MainBorder"
+                        Background="White"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="700" />
+                        </Grid.ColumnDefinitions>
+
+                        <ScrollViewer VerticalScrollMode="Auto"
+                                      HorizontalScrollMode="Auto"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      MaxHeight="700"
+                                      MaxWidth="700">
+
+                            <StackPanel Margin="20"
+                                        Spacing="20">
+
+                                <TextBlock Text="Seleccione el pago que desea anular" 
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           VerticalAlignment="Center"/>
+
+                                <ListView x:Name="LstVPayments"
+                                          Header="Pagos vinculados al caso:"/>
+
+                                <TextBox x:Name="TxtCaseNumber"
+                                         Header="Número de caso interno"
+                                         PlaceholderText="Número de caso interno"
+                                         IsReadOnly="True"/>
+
+                                <TextBox Name="TxtName"
+                                         Header="Nombre del cliente"
+                                         PlaceholderText="Nombre del cliente"
+                                         IsReadOnly="True"/>
+
+                                <TextBox x:Name="TxtPaymentMethod"
+                                         Header="Forma de pago"
+                                         Text="Forma de pago"
+                                         VerticalAlignment="Center"
+                                         IsReadOnly="True"/>
+
+                                <TextBox x:Name="TxtPaymentAmount"
+                                         Header="Total a pagar"
+                                         MaxLength="100"
+                                         PlaceholderText="Monto a pagar"
+                                         IsReadOnly="True"/>
+
+                                <TextBox x:Name="TxtDescription"
+                                         Header="Descripción del bien material"
+                                         PlaceholderText="Ingrese una descripción del bien material"/>
+
+                                <TextBox x:Name="TxtReason"
+                                         Height="100"
+                                         TextWrapping="Wrap"
+                                         MaxLength="200"
+                                         Header="Comentarios"
+                                         PlaceholderText="Ingrese la razón por la cual se elimina el pago"/>
+
+                                <TextBlock x:Name="txtAttachedFiles"
+                                           Text="No hay archivos adjuntos"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="10"
+                                            HorizontalAlignment="Right">
+
+                                    <Button x:Name="BtnCancel" 
+                                            Content="Cancelar"
+                                            HorizontalAlignment="Right"
+                                            Click="BtnCancel_Click"/>
+
+                                    <Button x:Name="BtnSave" 
+                                            Content="Anular"
+                                            HorizontalAlignment="Right"
+                                            Click="BtnSave_Click"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </ScrollViewer>
+
+                    </Grid>
+
+                </Border>
+
+            </controls:DropShadowPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+    
+</Page>

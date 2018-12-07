@@ -6,12 +6,29 @@ namespace Nexxon.Views.Records
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media.Animation;
+    using Windows.UI.Xaml.Navigation;
+    using Nexxon.Models.Security;
+    using Nexxon.ViewModels.Security;
 
     public sealed partial class RecordsPage : Page
     {
+        private String profile;
+
         public RecordsPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AutorizationModel obj_AutorizationModel = new AutorizationModel();
+            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+
+            this.profile = e.Parameter.ToString();
+
+            obj_AutorizationModel._sPrifle = this.profile;
+
+            
         }
 
         private void PI_CheckRecords_Loaded(object sender, RoutedEventArgs e)
@@ -31,7 +48,7 @@ namespace Nexxon.Views.Records
 
         private void BtnCreateCase_Click(object sender, RoutedEventArgs e)
         {
-            CheckRecordsFrame.Navigate(typeof(Records.AddCase), null, new DrillInNavigationTransitionInfo());
+            CheckRecordsFrame.Navigate(typeof(Records.AddCase), profile, new DrillInNavigationTransitionInfo());
         }
 
         private void BtnUpdateCase_Click(object sender, RoutedEventArgs e)
