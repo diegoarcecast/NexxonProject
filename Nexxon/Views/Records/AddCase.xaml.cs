@@ -28,6 +28,7 @@ namespace Nexxon.Views.Records
             this.profile = e.Parameter.ToString();
 
             obj_AutorizationModel._sPrifle = this.profile;
+            obj_AutorizationModel._radioButtonJudicialCase = this.rdbtnJudicial;
 
             obj_AuthorizationViewModel.CreateCasePermissions(ref obj_AutorizationModel);
         }

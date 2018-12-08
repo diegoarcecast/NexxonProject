@@ -28,8 +28,8 @@ namespace Nexxon.Models.Security
         #endregion
 
         #region Cases
-        private Button RadioButtonJudicialCase;
-        public Button _radioButtonJudicialCase
+        private RadioButton RadioButtonJudicialCase;
+        public RadioButton _radioButtonJudicialCase
         {
             get => RadioButtonJudicialCase;
             set => RadioButtonJudicialCase = value;
