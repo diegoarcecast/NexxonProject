@@ -3,19 +3,23 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Nexxon.Views.Records"
+    xmlns:helper="using:Nexxon.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource White}">
+    Background="{ThemeResource White}" Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <helper:BoolToVisibility x:Key="boolToVisibility"/>
+    </Page.Resources>
 
     <Grid>
 
         <Pivot x:Name="Pivot_Records">
             
             <PivotItem x:Name="PI_CheckRecords"
-                       Header="Consultar expediente"
-                       Loaded="PI_CheckRecords_Loaded">
+                       Header="Consultar expediente">
 
                 <Grid>
                     <controls:DropShadowPanel BlurRadius="24"
@@ -61,11 +65,13 @@
 
                                     <Button Name="BtnUpdateCase" 
                                             Content="Consultar caso"
-                                            Click="BtnUpdateCase_Click"/>
+                                            Click="BtnUpdateCase_Click"
+                                            Visibility="{Binding IsBtnCheckCaseVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}"/>
 
                                     <Button Name="BtnCreateCase" 
                                             Content="Caso nuevo"
-                                            Click="BtnCreateCase_Click"/>
+                                            Click="BtnCreateCase_Click"
+                                            Visibility="{Binding IsBtnCreateCaseVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
@@ -81,8 +87,7 @@
             </PivotItem>
 
             <PivotItem x:Name="PI_CreateRecords"
-                       Header="Crear expediente"
-                       Loaded="PI_CreateRecords_Loaded">
+                       Header="Crear expediente">
 
                 <Grid>
                     <controls:DropShadowPanel BlurRadius="24"
@@ -213,8 +218,7 @@
             </PivotItem>
 
             <PivotItem x:Name="PI_UpdateRecords"
-                       Header="Editar expediente"
-                       Loaded="PI_UpdateRecords_Loaded">
+                       Header="Editar expediente">
 
                 <Grid x:Name="MainGrid">
                     

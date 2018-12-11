@@ -13,7 +13,7 @@ namespace Nexxon.Views.Records
 
     public sealed partial class AddCase : Page
     {
-        private String profile;
+        private string profile;
 
         public AddCase()
         {
@@ -22,15 +22,16 @@ namespace Nexxon.Views.Records
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AutorizationModel obj_AutorizationModel = new AutorizationModel();
-            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+            AutorizationModel authorizationModel = new AutorizationModel();
+            AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
             this.profile = e.Parameter.ToString();
 
-            obj_AutorizationModel._sPrifle = this.profile;
-            obj_AutorizationModel._radioButtonJudicialCase = this.rdbtnJudicial;
+            authorizationModel.UserProfile = this.profile;
 
-            obj_AuthorizationViewModel.CreateCasePermissions(ref obj_AutorizationModel);
+            this.DataContext = authorizationModel;
+
+            authorizationViewModel.CreateCasePermissions(ref authorizationModel);
         }
 
         private void rdbtnNotary_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)

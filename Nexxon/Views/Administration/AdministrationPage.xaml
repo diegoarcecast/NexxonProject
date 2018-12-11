@@ -3,11 +3,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Nexxon.Views.Administration"
+    xmlns:helper="using:Nexxon.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <helper:BoolToVisibility x:Key="boolToVisibility"/>
+    </Page.Resources>
 
     <Grid>
 
@@ -48,12 +53,14 @@
 
                                     <TextBox Name="TxtEmailChangePassword"
                                              Header="Correo electrónico"
-                                             PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+                                             PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"
+                                             IsEnabled="{Binding IsTextBoxEmailChangePasswordEnable}"/>
 
                                     <Button Name="BtnSearch"
                                             Content="Buscar usuario"
                                             HorizontalAlignment="Stretch"
-                                            Click="BtnSearch_Click"/>
+                                            Click="BtnSearch_Click"
+                                            Visibility="{Binding IsBtnSearchUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}"/>
 
                                     <TextBlock Text="Usuario encontrado / Usuario no encontrado"
                                                VerticalAlignment="Center"/>
@@ -92,8 +99,9 @@
 
             </PivotItem>
 
-            <PivotItem Header="Editar usuarios"
-                       x:Name="PI_ModifyUser">
+            <PivotItem Header="{Binding PivotItemModifyUserHeader, Mode=TwoWay}"
+                       x:Name="PI_ModifyUser"
+                       Visibility="{Binding IsPivotItemModifyUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}">
 
                 <ScrollViewer VerticalScrollMode="Auto"
                               HorizontalScrollMode="Auto"
@@ -230,8 +238,9 @@
 
             </PivotItem>
 
-            <PivotItem Header="Agregar usuarios"
-                       x:Name="PI_AddUser">
+            <PivotItem Header="{Binding PivotItemAddUserHeader, Mode=TwoWay}"
+                       x:Name="PI_AddUser"
+                       Visibility="{Binding IsPivotItemAddUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}">
 
                 <ScrollViewer VerticalScrollMode="Auto"
                               HorizontalScrollMode="Auto"

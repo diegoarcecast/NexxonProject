@@ -34,21 +34,16 @@ namespace Nexxon.Views.Administration
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AutorizationModel obj_AutorizationModel = new AutorizationModel();
-            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+            AutorizationModel authorizationModel = new AutorizationModel();
+            AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
             this.profile = e.Parameter.ToString();
 
-            obj_AutorizationModel._sPrifle = this.profile;
-            obj_AutorizationModel._pivotItemAddUser = this.PI_AddUser;
-            obj_AutorizationModel._pivotItemModifyUser = this.PI_ModifyUser;
-            obj_AutorizationModel._textBoxEmailChangePassword = this.TxtEmailChangePassword;
+            authorizationModel.UserProfile = this.profile;
 
-            obj_AuthorizationViewModel.AdministrationPermissions(ref obj_AutorizationModel);
+            authorizationViewModel.AdministrationPermissions(ref authorizationModel);
 
-            this.DataContext = obj_AutorizationModel;
-
-
+            this.DataContext = authorizationModel;
         }
 
         private void BtnAddUser_Click(object sender, RoutedEventArgs e)

@@ -95,7 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BoolToVisibility.cs" />
     <Compile Include="Models\Cat_Mant\DbModel.cs" />
+    <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MenuItems.cs" />
     <Compile Include="Models\Security\AuthenticationModel.cs" />
     <Compile Include="Models\Security\AutorizationModel.cs" />
@@ -323,7 +325,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Icons\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Parameters\" />
     <Folder Include="Services\" />
   </ItemGroup>

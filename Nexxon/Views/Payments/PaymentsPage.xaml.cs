@@ -20,19 +20,15 @@ namespace Nexxon.Views.Payments
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AutorizationModel obj_AutorizationModel = new AutorizationModel();
-            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+            AutorizationModel authorizationModel = new AutorizationModel();
+            AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
             this.profile = e.Parameter.ToString();
+            authorizationModel.UserProfile = this.profile;
 
-            obj_AutorizationModel._sPrifle = this.profile;
-            obj_AutorizationModel._buttonDeletePayment = this.BtnDeletePayment;
+            this.DataContext = authorizationModel;
 
-            obj_AuthorizationViewModel.PaymentsPermissions(ref obj_AutorizationModel);
-
-            this.DataContext = obj_AutorizationModel;
-
-            
+            authorizationViewModel.PaymentsPermissions(ref authorizationModel);
         }
 
         private void BtnSearch_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -62,11 +58,7 @@ namespace Nexxon.Views.Payments
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //AuthenticationModel obj_AuthenticationModel = new AuthenticationModel();
-
             
-
-            //this.DataContext = obj_AuthenticationModel;
         }
     }
 }

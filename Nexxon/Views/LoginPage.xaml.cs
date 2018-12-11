@@ -10,9 +10,12 @@ namespace Nexxon.Views
     using ViewModels.Cat_Mant;
     using System.Data;
     using Nexxon.Models.Security;
+    using Nexxon.Helpers;
 
     public sealed partial class LoginPage : Page
     {
+        AuthenticationModel authenticationModel = new AuthenticationModel();
+
         public LoginPage()
         {
             this.InitializeComponent();
@@ -22,21 +25,14 @@ namespace Nexxon.Views
         {
             //TODO: Move this when MVVM is implemented.
             string sError = "";
-            AuthenticationModel obj_AuthenticationModel = new AuthenticationModel();
-            AuthenticationViewModel obj_AuthenticationViewModel = new AuthenticationViewModel();
+            AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
 
-            obj_AuthenticationModel._lpUserName = TxtEmail.Text;
-            obj_AuthenticationModel._lpPassword = PBXPassword.Password.ToString();
 
-            obj_AuthenticationViewModel.authenticateUser(ref obj_AuthenticationModel, ref sError);
+            authenticationViewModel.authenticateUser(ref authenticationModel, ref sError);
 
-            if (obj_AuthenticationModel._lpProfile == "")
+            if (authenticationModel.UserProfile != string.Empty)
             {
-                TxtError.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Frame.Navigate(typeof(MainPage), obj_AuthenticationModel._lpProfile, new DrillInNavigationTransitionInfo());
+                Frame.Navigate(typeof(MainPage), authenticationModel.UserProfile, new DrillInNavigationTransitionInfo());
             }
         }
 
@@ -47,7 +43,11 @@ namespace Nexxon.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            TxtError.Visibility = Visibility.Collapsed;
+            AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
+
+            this.DataContext = authenticationModel;
+
+            authenticationViewModel.OnFirstLoad(ref authenticationModel);
         }
     }
 }

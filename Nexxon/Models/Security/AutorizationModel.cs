@@ -7,73 +7,183 @@ using Windows.UI.Xaml.Controls;
 
 namespace Nexxon.Models.Security
 {
-    public class AutorizationModel
+    public class AutorizationModel : MainModel
     {
-        public string _sPrifle { get; set; }
-
-        #region Records
-        private Button ButtonCheckCase;
-        public Button _buttonCheckCase
+        private string _userPrifle;
+        public string UserProfile
         {
-            get => ButtonCheckCase;
-            set => ButtonCheckCase = value;
+            get
+            {
+                return _userPrifle;
+            }
+            set
+            {
+                _userPrifle = value;
+                OnPropertyChanged("UserProfile");
+            }
         }
 
-        private Button ButtonCreateCase;
-        public Button _buttonCreateCase
+        #region Records
+        private bool _isBtnCheckCaseVisible;
+        public bool IsBtnCheckCaseVisible
         {
-            get => ButtonCreateCase;
-            set => ButtonCreateCase = value;
+            get
+            {
+                return _isBtnCheckCaseVisible;
+            }
+            set
+            {
+                _isBtnCheckCaseVisible = value;
+                OnPropertyChanged("IsBtnCheckCaseVisible");
+            }
+        }
+
+        private bool _isBtnCreateCaseVisible;
+        public bool IsBtnCreateCaseVisible
+        {
+            get
+            {
+                return _isBtnCreateCaseVisible;
+            }
+            set
+            {
+                _isBtnCreateCaseVisible = value;
+                OnPropertyChanged("IsBtnCreateCaseVisible");
+            }
         }
         #endregion
 
         #region Cases
-        private RadioButton RadioButtonJudicialCase;
-        public RadioButton _radioButtonJudicialCase
+        private bool _isRadioBtnJudicialCaseVisible;
+        public bool IsRadioBtnJudicialCaseVisible
         {
-            get => RadioButtonJudicialCase;
-            set => RadioButtonJudicialCase = value;
+            get
+            {
+                return _isRadioBtnJudicialCaseVisible;
+            }
+            set
+            {
+                _isRadioBtnJudicialCaseVisible = value;
+                OnPropertyChanged("IsRadioBtnJudicialCaseVisible");
+            }
         }
         #endregion
 
         #region Agenda
-        private ComboBox CbxAgendaUsers;
-        public ComboBox _cbxAgendaUsers
+        private bool _isCbxSelectUserVisible;
+        public bool IsCbxSelectUserVisible
         {
-            get => CbxAgendaUsers;
-            set => CbxAgendaUsers = value;
+            get
+            {
+                return _isCbxSelectUserVisible;
+            }
+            set
+            {
+                _isCbxSelectUserVisible = value;
+                OnPropertyChanged("IsCbxSelectUserVisible");
+            }
         }
         #endregion
 
         #region Payments
-        private Button ButtonDeletePayment;
-        public Button _buttonDeletePayment
+        private bool _isBtnDeletePaymentVisible;
+        public bool IsBtnDeletePaymentVisible
         {
-            get => ButtonDeletePayment;
-            set => ButtonDeletePayment = value;
+            get
+            {
+                return _isBtnDeletePaymentVisible;
+            }
+            set
+            {
+                _isBtnDeletePaymentVisible = value;
+                OnPropertyChanged("IsBtnDeletePaymentVisible");
+            }
         }
         #endregion
 
         #region Administration
-        private PivotItem PivotItemModifyUser;
-        public PivotItem _pivotItemModifyUser
+        private bool _isPivotItemModifyUserVisible;
+        public bool IsPivotItemModifyUserVisible
         {
-            get => PivotItemModifyUser;
-            set => PivotItemModifyUser = value;
+            get
+            {
+                return _isPivotItemModifyUserVisible;
+            }
+            set
+            {
+                _isPivotItemModifyUserVisible = value;
+                OnPropertyChanged("IsPivotItemModifyUserVisible");
+            }
         }
 
-        private PivotItem PivotItemAddUser;
-        public PivotItem _pivotItemAddUser
+        private string _pivotItemModifyUserHeader;
+        public string PivotItemModifyUserHeader
         {
-            get => PivotItemAddUser;
-            set => PivotItemAddUser = value;
+            get
+            {
+                return _pivotItemModifyUserHeader;
+            }
+            set
+            {
+                _pivotItemModifyUserHeader = value;
+                OnPropertyChanged("PivotItemModifyUserHeader");
+            }
         }
 
-        private TextBox TextBoxEmailChangePassword;
-        public TextBox _textBoxEmailChangePassword
+        private bool _isPivotItemAddUserVisible;
+        public bool IsPivotItemAddUserVisible
         {
-            get => TextBoxEmailChangePassword;
-            set => TextBoxEmailChangePassword = value;
+            get
+            {
+                return _isPivotItemAddUserVisible;
+            }
+            set
+            {
+                _isPivotItemAddUserVisible = value;
+                OnPropertyChanged("IsPivotItemAddUserVisible");
+            }
+        }
+
+        private string _pivotItemAddUserHeader;
+        public string PivotItemAddUserHeader
+        {
+            get
+            {
+                return _pivotItemAddUserHeader;
+            }
+            set
+            {
+                _pivotItemAddUserHeader = value;
+                OnPropertyChanged("PivotItemAddUserHeader");
+            }
+        }
+
+        private bool _isTextBoxEmailChangePasswordEnable;
+        public bool IsTextBoxEmailChangePasswordEnable
+        {
+            get
+            {
+                return _isTextBoxEmailChangePasswordEnable;
+            }
+            set
+            {
+                _isTextBoxEmailChangePasswordEnable = value;
+                OnPropertyChanged("IsTextBoxEmailChangePasswordEnable");
+            }
+        }
+
+        private bool _isBtnSearchUserVisible;
+        public bool IsBtnSearchUserVisible
+        {
+            get
+            {
+                return _isBtnSearchUserVisible;
+            }
+            set
+            {
+                _isBtnSearchUserVisible = value;
+                OnPropertyChanged("IsBtnSearchUserVisible");
+            }
         }
         #endregion
     }

@@ -15,11 +15,11 @@ namespace Nexxon.ViewModels.Security
     {
         private const string TOKEN = "nexxon";
 
-        public void authenticateUser(ref AuthenticationModel obj_UsersModel, ref string sMsjError)
+        public void authenticateUser(ref AuthenticationModel authenticationModel, ref string sMsjError)
         {
             #region Variables Locales
 
-            string sNombreTabla, sNombreSP, sEncryptedPass = obj_UsersModel._lpPassword;
+            string sNombreTabla, sNombreSP, sEncryptedPass = authenticationModel.UserPassword;
 
             DbModel obj_DbModel = new DbModel();
             DbViewModel obj_DbViewModel = new DbViewModel();
@@ -33,7 +33,7 @@ namespace Nexxon.ViewModels.Security
             DataRow dr1 = obj_DbModel.dtParametros.NewRow();
             dr1["Nombre"] = "@email";
             dr1["TipoDato"] = "4";
-            dr1["Valor"] = obj_UsersModel._lpUserName;
+            dr1["Valor"] = authenticationModel.UserName;
 
             DataRow dr2 = obj_DbModel.dtParametros.NewRow();
             dr2["Nombre"] = "@s_contrasena";
@@ -51,7 +51,7 @@ namespace Nexxon.ViewModels.Security
             if (obj_DbModel.sMsjError != string.Empty)
             {
                 sMsjError = obj_DbModel.sMsjError;
-                obj_UsersModel._lpProfile = String.Empty;
+                authenticationModel.UserProfile = String.Empty;
             }
             else
             {
@@ -59,11 +59,12 @@ namespace Nexxon.ViewModels.Security
 
                 if (obj_DbModel.DS.Tables[sNombreTabla].Rows.Count > 0)
                 {
-                    obj_UsersModel._lpProfile = obj_DbModel.DS.Tables[sNombreTabla].Rows[0][0].ToString();
+                    authenticationModel.UserProfile = obj_DbModel.DS.Tables[sNombreTabla].Rows[0][0].ToString();
                 }
                 else
                 {
-                    obj_UsersModel._lpProfile = "";
+                    authenticationModel.UserProfile = string.Empty;
+                    authenticationModel.IsErrorMessageVisible = true;
                 }
             }
         }
@@ -88,6 +89,11 @@ namespace Nexxon.ViewModels.Security
             tripledes.Clear();
 
             sPass = Convert.ToBase64String(resultado, 0, resultado.Length); // Convertimos la cadena y la regresamos.
+        }
+
+        public void OnFirstLoad(ref AuthenticationModel authenticationModel)
+        {
+            authenticationModel.IsErrorMessageVisible = false;
         }
     }
 }

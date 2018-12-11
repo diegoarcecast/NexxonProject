@@ -20,9 +20,6 @@ using Nexxon.ViewModels.Security;
 
 namespace Nexxon.Views.Agenda
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AgendaPage : Page
     {
         private String profile;
@@ -34,24 +31,25 @@ namespace Nexxon.Views.Agenda
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AutorizationModel obj_AutorizationModel = new AutorizationModel();
-            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+            AutorizationModel AuthorizationModel = new AutorizationModel();
+            AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
             this.profile = e.Parameter.ToString();
+            AuthorizationModel.UserProfile = this.profile;
 
-            obj_AutorizationModel._sPrifle = this.profile;
-            obj_AutorizationModel._cbxAgendaUsers = this.CbxUser;
+            this.DataContext = AuthorizationModel;
 
-            obj_AuthorizationViewModel.ViewAgendaPermissions(ref obj_AutorizationModel);
-
-            this.DataContext = obj_AutorizationModel;
-
-
+            authorizationViewModel.ViewAgendaPermissions(ref AuthorizationModel);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

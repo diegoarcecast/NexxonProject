@@ -21,29 +21,15 @@ namespace Nexxon.Views.Records
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            AutorizationModel obj_AutorizationModel = new AutorizationModel();
-            AuthorizationViewModel obj_AuthorizationViewModel = new AuthorizationViewModel();
+            AutorizationModel authorizationModel = new AutorizationModel();
+            AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
             this.profile = e.Parameter.ToString();
+            authorizationModel.UserProfile = this.profile;
 
-            obj_AutorizationModel._sPrifle = this.profile;
+            this.DataContext = authorizationModel;
 
-            
-        }
-
-        private void PI_CheckRecords_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void PI_CreateRecords_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void PI_UpdateRecords_Loaded(object sender, RoutedEventArgs e)
-        {
-            
+            authorizationViewModel.RecordsPagePermissions(ref authorizationModel);
         }
 
         private void BtnCreateCase_Click(object sender, RoutedEventArgs e)
@@ -96,6 +82,11 @@ namespace Nexxon.Views.Records
         private void BtnEditRecordCancel_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

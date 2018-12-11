@@ -11,63 +11,80 @@ namespace Nexxon.ViewModels.Security
 {
     public class AuthorizationViewModel
     {
-        public void RecordsPermissions(ref AutorizationModel obj_AutorizationModel)
+        public void RecordsPagePermissions(ref AutorizationModel authorizationModel)
         {
-            if (obj_AutorizationModel._sPrifle == "Asistente")
+            if (authorizationModel.UserProfile == "Asistente")
             {
-                obj_AutorizationModel._buttonCheckCase.Visibility = Visibility.Collapsed;
-                obj_AutorizationModel._buttonCreateCase.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        public void CreateCasePermissions(ref AutorizationModel obj_AutorizationModel)
-        {
-            if (obj_AutorizationModel._sPrifle == "Notario")
-            {
-                obj_AutorizationModel._radioButtonJudicialCase.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        public void ViewAgendaPermissions(ref AutorizationModel obj_AutorizationModel)
-        {
-            if (obj_AutorizationModel._sPrifle == "Administrador" || obj_AutorizationModel._sPrifle == "Administrador")
-            {
-                obj_AutorizationModel._cbxAgendaUsers.Visibility = Visibility.Visible;
+                authorizationModel.IsBtnCheckCaseVisible = false;
+                authorizationModel.IsBtnCreateCaseVisible = false;
             }
             else
             {
-                obj_AutorizationModel._cbxAgendaUsers.Visibility = Visibility.Collapsed;
+                authorizationModel.IsBtnCheckCaseVisible = true;
+                authorizationModel.IsBtnCreateCaseVisible = true;
             }
         }
 
-        public void PaymentsPermissions(ref AutorizationModel obj_AutorizationModel)
+        public void CreateCasePermissions(ref AutorizationModel authorizationModel)
         {
-            if (obj_AutorizationModel._sPrifle == "Administrador")
+            if (authorizationModel.UserProfile == "Administrador" || authorizationModel.UserProfile == "Abogado")
             {
-                obj_AutorizationModel._buttonDeletePayment.Visibility = Visibility.Visible;
+                authorizationModel.IsRadioBtnJudicialCaseVisible = true;
             }
             else
             {
-                obj_AutorizationModel._buttonDeletePayment.Visibility = Visibility.Collapsed;
+                authorizationModel.IsRadioBtnJudicialCaseVisible = false;
+            }
+
+        }
+
+        public void ViewAgendaPermissions(ref AutorizationModel authorizationModel)
+        {
+            if (authorizationModel.UserProfile == "Administrador" || authorizationModel.UserProfile == "Asistente")
+            {
+                authorizationModel.IsCbxSelectUserVisible = true;
+            }
+            else
+            {
+                authorizationModel.IsCbxSelectUserVisible = false;
             }
         }
 
-        public void AdministrationPermissions(ref AutorizationModel obj_AutorizationModel)
+        public void PaymentsPermissions(ref AutorizationModel authorizationModel)
         {
-            if (obj_AutorizationModel._sPrifle == "Administrador")
+            if (authorizationModel.UserProfile == "Administrador")
             {
-                obj_AutorizationModel._pivotItemAddUser.Visibility = Visibility.Visible;
-                obj_AutorizationModel._pivotItemModifyUser.Visibility = Visibility.Visible;
+                authorizationModel.IsBtnDeletePaymentVisible = true;
             }
             else
             {
-                obj_AutorizationModel._pivotItemAddUser.Visibility = Visibility.Collapsed;
-                obj_AutorizationModel._pivotItemAddUser.Header = "";
+                authorizationModel.IsBtnDeletePaymentVisible = false;
+            }
+        }
 
-                obj_AutorizationModel._pivotItemModifyUser.Visibility = Visibility.Collapsed;
-                obj_AutorizationModel._pivotItemModifyUser.Header = "";
+        public void AdministrationPermissions(ref AutorizationModel authorizationModel)
+        {
+            if (authorizationModel.UserProfile == "Administrador")
+            {
+                authorizationModel.IsTextBoxEmailChangePasswordEnable = true;
+                authorizationModel.IsBtnSearchUserVisible = true;
 
-                obj_AutorizationModel._textBoxEmailChangePassword.IsEnabled = false;
+                authorizationModel.IsPivotItemModifyUserVisible = true;
+                authorizationModel.PivotItemModifyUserHeader = "Editar usuarios";
+
+                authorizationModel.IsPivotItemAddUserVisible = true;
+                authorizationModel.PivotItemAddUserHeader = "Agregar usuarios";
+            }
+            else
+            {
+                authorizationModel.IsTextBoxEmailChangePasswordEnable = false;
+                authorizationModel.IsBtnSearchUserVisible = false;
+
+                authorizationModel.IsPivotItemModifyUserVisible = false;
+                authorizationModel.PivotItemModifyUserHeader = "";
+
+                authorizationModel.IsPivotItemAddUserVisible = false;
+                authorizationModel.PivotItemAddUserHeader = "";
             }
         }
     }
