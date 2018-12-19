@@ -63,7 +63,7 @@
                     </NavigationViewItem>
 
                     <NavigationViewItem Name="NVI_LogOut" 
-                                    Content="Cerrar sesión">
+                                    Content="Cerrar sesión" Tapped="NVI_LogOut_Tapped">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE7E8;"/>
                         </NavigationViewItem.Icon>
@@ -87,6 +87,7 @@
 
                     <TextBlock x:Name="txtUsuario"
                                Text="Bienvenido" 
+                               HorizontalAlignment="Center"
                                Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                     <TextBlock Text="Seleccione una opción del menu para iniciar" 

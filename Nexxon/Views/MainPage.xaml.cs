@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Nexxon.Models.Security;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,7 +24,9 @@ namespace Nexxon.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private String profile;
+        AutorizationModel autorizationModel = new AutorizationModel();
+        private string userProfile;
+        private string userEmail;
 
         public MainPage()
         {
@@ -32,22 +35,24 @@ namespace Nexxon.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.profile = e.Parameter.ToString();
+            autorizationModel = (AutorizationModel)e.Parameter;
+            userProfile = autorizationModel.UserProfile;
+            userEmail = autorizationModel.UserEmail;
         }
 
         private void NVI_Agenda_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Agenda.AgendaPage), profile, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Agenda.AgendaPage), userProfile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Records_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Records.RecordsPage), profile, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Records.RecordsPage), userProfile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Payments_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Payments.PaymentsPage), profile, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Payments.PaymentsPage), userProfile, new DrillInNavigationTransitionInfo());
         }
 
         private void NVI_Notifications_Tapped(object sender, TappedRoutedEventArgs e)
@@ -57,7 +62,18 @@ namespace Nexxon.Views
 
         private void NVI_Administration_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentFrame.Navigate(typeof(Administration.AdministrationPage), profile, new DrillInNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Administration.AdministrationPage), autorizationModel, new DrillInNavigationTransitionInfo());
+        }
+
+        private void NVI_LogOut_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ContentFrame.DataContext = null;
+            ContentFrame.BackStack.Clear();
+
+            this.Frame.DataContext = null;
+            this.Frame.BackStack.Clear();
+
+            Frame.Navigate(typeof(LoginPage), userProfile, new DrillInNavigationTransitionInfo());
         }
     }
 }

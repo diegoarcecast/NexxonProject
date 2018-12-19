@@ -51,17 +51,38 @@ namespace Nexxon
 
         #region Connection String
         private string connectionString =
-            "SERVER = GREIVIN; DATABASE = DB_BUFFET_NEXXON; USER ID = sa; PASSWORD = N3xx0n";
+            "SERVER = localhost; DATABASE = DB_BUFFET_NEXXON; USER ID = sa; PASSWORD = N3xx0n";
 
-        public string ConnectionString { get => connectionString; set => connectionString = value; }
+        public string ConnectionString { get => connectionString; }
         #endregion
 
         #region DB Params
-        private string spAuthentication = "spAutenticarUsuario";
-        public string SpAuthentication { get => spAuthentication; set => spAuthentication = value; }
+        private string _spSearchUser = "spListarUsuario";
+        public string SpSearchUser { get => _spSearchUser; }
 
-        private string tblAuthentication = "T_USUARIO";
-        public string TblAuthentication { get => tblAuthentication; set => tblAuthentication = value; }
+        private string _tblUsers = "T_USUARIO";
+        public string TblUsers { get => _tblUsers; }
+
+        private string _spChangeUserPassword = "spEditarContrasena";
+        public string SpChangeUserPassword { get => _spChangeUserPassword; }
+
+        private string _spEditUser = "spEditarUsuario";
+        public string SpEditUser { get => _spEditUser; }
+
+        private string _spAuthentication = "spAutenticarUsuario";
+        public string SpAuthentication { get => _spAuthentication; }
+
+        private string _tblAuthentication = "T_USUARIO";
+        public string TblAuthentication { get => _tblAuthentication; }
+
+        private string _spListProfiles = "spListarPerfil";
+        public string SpListProfiles { get => _spListProfiles; }
+
+        private string _tblProfiles = "T_PERFIL";
+        public string TblProfiles { get => _tblProfiles; }
+
+        private string _spCreateUser = "spAgregarUsuario";
+        public string SpCreateUser { get => _spCreateUser; }
         #endregion
 
     }

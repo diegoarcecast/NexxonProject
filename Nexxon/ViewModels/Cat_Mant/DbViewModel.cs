@@ -13,88 +13,88 @@ namespace Nexxon.ViewModels.Cat_Mant
     public class DbViewModel
     {
         /// <summary>
-        /// Metodo para ir al App.config y leer el connectionString y usarlo para crear
-        /// un objeto SqlConnection a partir de dicho connectionString
+        /// Metodo para ir al App.waml.cs y leer el connection string y usarlo para crear
+        /// un objeto SqlConnection a partir de dicho connection string
         /// </summary>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        public void getConnection(ref DbModel obj_DbModel)
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        public void GetConnection(ref DbModel dbModel)
         {
             try
             {
-                obj_DbModel.sCadenaCNX = (App.Current as App).ConnectionString;
-                obj_DbModel.CNX = new SqlConnection(obj_DbModel.sCadenaCNX);
+                dbModel.sCadenaCNX = (App.Current as App).ConnectionString;
+                dbModel.CNX = new SqlConnection(dbModel.sCadenaCNX);
 
-                obj_DbModel.bBanderaError = false;
-                obj_DbModel.sMsjError = string.Empty;
+                dbModel.bBanderaError = false;
+                dbModel.sMsjError = string.Empty;
             }
             catch (SqlException ex)
             {
-                obj_DbModel.sCadenaCNX = string.Empty;
-                obj_DbModel.CNX = null;
+                dbModel.sCadenaCNX = string.Empty;
+                dbModel.CNX = null;
 
-                obj_DbModel.bBanderaError = true;
-                obj_DbModel.sMsjError = ex.Message.ToString();
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
             }
         }
 
         /// <summary>
         /// Metodo para abrir la conexion a la base de datos
         /// </summary>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        public void openConnection(ref DbModel obj_DbModel)
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        public void OpenConnection(ref DbModel dbModel)
         {
             try
             {
-                if (obj_DbModel.CNX != null)
+                if (dbModel.CNX != null)
                 {
-                    if (obj_DbModel.CNX.State == ConnectionState.Closed)
+                    if (dbModel.CNX.State == ConnectionState.Closed)
                     {
-                        obj_DbModel.CNX.Open();
-                        obj_DbModel.bBanderaError = false;
-                        obj_DbModel.sMsjError = string.Empty;
+                        dbModel.CNX.Open();
+                        dbModel.bBanderaError = false;
+                        dbModel.sMsjError = string.Empty;
                     }
                     else
                     {
-                        obj_DbModel.bBanderaError = true;
-                        obj_DbModel.sMsjError = "La conexion ya se encuentra abierta";
+                        dbModel.bBanderaError = true;
+                        dbModel.sMsjError = "La conexion ya se encuentra abierta";
                     }
                 }
             }
             catch (SqlException ex)
             {
-                obj_DbModel.bBanderaError = true;
-                obj_DbModel.sMsjError = ex.Message.ToString();
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
             }
         }
 
         /// <summary>
         /// Metodo para cerrar la conexion a la base de datos
         /// </summary>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        public void closeConnection(ref DbModel obj_DbModel)
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        public void CloseConnection(ref DbModel dbModel)
         {
             try
             {
-                if (obj_DbModel.CNX != null)
+                if (dbModel.CNX != null)
                 {
-                    if (obj_DbModel.CNX.State == ConnectionState.Open)
+                    if (dbModel.CNX.State == ConnectionState.Open)
                     {
-                        obj_DbModel.CNX.Close();
-                        obj_DbModel.CNX.Dispose();
-                        obj_DbModel.bBanderaError = false;
-                        obj_DbModel.sMsjError = string.Empty;
+                        dbModel.CNX.Close();
+                        dbModel.CNX.Dispose();
+                        dbModel.bBanderaError = false;
+                        dbModel.sMsjError = string.Empty;
                     }
                     else
                     {
-                        obj_DbModel.bBanderaError = true;
-                        obj_DbModel.sMsjError = "La conexion ya se encuentra cerrada";
+                        dbModel.bBanderaError = true;
+                        dbModel.sMsjError = "La conexion ya se encuentra cerrada";
                     }
                 }
             }
             catch (SqlException ex)
             {
-                obj_DbModel.bBanderaError = true;
-                obj_DbModel.sMsjError = ex.Message.ToString();
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
             }
         }
 
@@ -103,89 +103,90 @@ namespace Nexxon.ViewModels.Cat_Mant
         /// </summary>
         /// <param name="sNombreTabla">Tabla a la cual se va a hacer la consulta</param>
         /// <param name="sNombreSP">Stored procedure que se llamara</param>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        /// <param name="obj_DAL_Genericos">Objeto de tipo cls_DAL_Genericos</param>
-        public void executeFill(string sNombreTabla, string sNombreSP,
-                                ref DbModel obj_DbModel/*, cls_DAL_Genericos obj_DAL_Genericos*/)
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        public void ExecuteFill(string sNombreTabla, string sNombreSP, ref DbModel dbModel)
         {
             try
             {
-                getConnection(ref obj_DbModel);
-                openConnection(ref obj_DbModel);
+                GetConnection(ref dbModel);
+                OpenConnection(ref dbModel);
 
-                obj_DbModel.DAP = new SqlDataAdapter(sNombreSP, obj_DbModel.CNX);
-                obj_DbModel.DAP.SelectCommand.CommandType = CommandType.StoredProcedure;
+                dbModel.DAP = new SqlDataAdapter(sNombreSP, dbModel.CNX);
+                dbModel.DAP.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                foreach (DataRow dr in obj_DbModel.dtParametros.Rows)
+                if (!(dbModel.dtParametros is null))
                 {
-                    switch (dr["TipoDato"].ToString())
+                    foreach (DataRow dr in dbModel.dtParametros.Rows)
                     {
-                        case "1":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "2":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "3":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "4":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "5":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "6":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "7":
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        case "8":
-                            {
-                                obj_DbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
-                            }
-                            break;
-                        default:
-                            {
-                                obj_DbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-                            }
-                            break;
+                        switch (dr["TipoDato"].ToString())
+                        {
+                            case "1":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "2":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "3":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "4":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "5":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "6":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "7":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "8":
+                                {
+                                    dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            default:
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                        }
                     }
                 }
 
-                obj_DbModel.DAP.Fill(obj_DbModel.DS, sNombreTabla);
+                dbModel.DAP.Fill(dbModel.DS, sNombreTabla);
 
-                obj_DbModel.bBanderaError = false;
-                obj_DbModel.sMsjError = string.Empty;
+                dbModel.bBanderaError = false;
+                dbModel.sMsjError = string.Empty;
             }
             catch (SqlException ex)
             {
-                obj_DbModel.bBanderaError = true;
-                obj_DbModel.sMsjError = ex.Message.ToString();
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
             }
             finally
             {
-                if (obj_DbModel.CNX.State == ConnectionState.Open)
+                if (dbModel.CNX.State == ConnectionState.Open)
                 {
-                    obj_DbModel.CNX.Close();
-                    obj_DbModel.CNX.Dispose();
-                    obj_DbModel.bBanderaError = false;
-                    obj_DbModel.sMsjError = string.Empty;
+                    dbModel.CNX.Close();
+                    dbModel.CNX.Dispose();
+                    dbModel.bBanderaError = false;
+                    dbModel.sMsjError = string.Empty;
                 }
 
             }
@@ -195,92 +196,93 @@ namespace Nexxon.ViewModels.Cat_Mant
         /// Metodo para Ejecutar eliminar, modificar e insertar datos de las Tablas cuya PK no sea IDENTITY
         /// </summary>
         /// <param name="sNombreSP">Stored procedure que se llamara</param>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        /// <param name="obj_DAL_Genericos">Objeto de tipo cls_DAL_Genericos</param>
-        //public void executeNonQuery(string sNombreSP,
-        //                            ref DbModel obj_DAL_BD, cls_DAL_Genericos obj_DAL_Genericos)
-        //{
-        //    try
-        //    {
-        //        traerConexion(ref obj_DAL_BD);
-        //        abrirConexion(ref obj_DAL_BD);
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        public void ExecuteNonQuery(string sNombreSP, ref DbModel dbModel)
+        {
+            try
+            {
+                GetConnection(ref dbModel);
+                OpenConnection(ref dbModel);
 
-        //        obj_DAL_BD.CMD = new SqlCommand(sNombreSP, obj_DAL_BD.CNX);
-        //        obj_DAL_BD.CMD.CommandType = CommandType.StoredProcedure;
+                dbModel.CMD = new SqlCommand(sNombreSP, dbModel.CNX);
+                dbModel.CMD.CommandType = CommandType.StoredProcedure;
 
-        //        foreach (DataRow dr in obj_DAL_Genericos.dtParametros.Rows)
-        //        {
-        //            switch (dr["TipoDato"].ToString())
-        //            {
-        //                case "1":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "2":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "3":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "4":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "5":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "6":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "7":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "8":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                default:
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //            }
-        //        }
+                foreach (DataRow dr in dbModel.dtParametros.Rows)
+                {
+                    switch (dr["TipoDato"].ToString())
+                    {
+                        case "1":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "2":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "3":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "4":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "5":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "6":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "7":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "8":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "9":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.SmallInt).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        default:
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                    }
+                }
 
-        //        obj_DAL_BD.CMD.ExecuteNonQuery();
+                dbModel.CMD.ExecuteNonQuery();
 
-        //        obj_DAL_BD.bBanderaError = false;
-        //        obj_DAL_BD.sMsjError = string.Empty;
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        obj_DAL_BD.bBanderaError = true;
-        //        obj_DAL_BD.sMsjError = ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        if (obj_DAL_BD.CNX.State == ConnectionState.Open)
-        //        {
-        //            obj_DAL_BD.CNX.Close();
-        //            obj_DAL_BD.CNX.Dispose();
-        //            obj_DAL_BD.bBanderaError = false;
-        //            obj_DAL_BD.sMsjError = string.Empty;
-        //        }
-        //    }
-        //}
+                dbModel.bBanderaError = false;
+                dbModel.sMsjError = string.Empty;
+            }
+            catch (SqlException ex)
+            {
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
+            }
+            finally
+            {
+                if (dbModel.CNX.State == ConnectionState.Open)
+                {
+                    dbModel.CNX.Close();
+                    dbModel.CNX.Dispose();
+                }
+            }
+        }
 
         /// <summary>
         /// Metodo para Ejecutar insertar datos de las Tablas cuya PK es IDENTITY
@@ -376,18 +378,18 @@ namespace Nexxon.ViewModels.Cat_Mant
         /// <summary>
         /// Metodo para llenar el DT de parametros
         /// </summary>
-        /// <param name="obj_DbModel">DT de parametros</param>
-        public void generarDataTableParametros(ref DbModel obj_DbModel)
+        /// <param name="dbModel">DT de parametros</param>
+        public void GenerarDataTableParametros(ref DbModel dbModel)
         {
-            obj_DbModel.dtParametros = new DataTable("Parametros");
+            dbModel.dtParametros = new DataTable("Parametros");
 
             DataColumn dcNombre = new DataColumn("Nombre");
             DataColumn dcTipoDato = new DataColumn("TipoDato");
             DataColumn dcValor = new DataColumn("Valor");
 
-            obj_DbModel.dtParametros.Columns.Add(dcNombre);
-            obj_DbModel.dtParametros.Columns.Add(dcTipoDato);
-            obj_DbModel.dtParametros.Columns.Add(dcValor);
+            dbModel.dtParametros.Columns.Add(dcNombre);
+            dbModel.dtParametros.Columns.Add(dcTipoDato);
+            dbModel.dtParametros.Columns.Add(dcValor);
         }
     }
 }

@@ -15,51 +15,58 @@ namespace Nexxon.ViewModels.Security
     {
         private const string TOKEN = "nexxon";
 
-        public void authenticateUser(ref AuthenticationModel authenticationModel, ref string sMsjError)
+        public void AuthenticateUser(ref AuthenticationModel authenticationModel, ref string sMsjError)
         {
-            #region Variables Locales
+            #region Local variables
 
             string sNombreTabla, sNombreSP, sEncryptedPass = authenticationModel.UserPassword;
 
-            DbModel obj_DbModel = new DbModel();
-            DbViewModel obj_DbViewModel = new DbViewModel();
+            DbModel dbModel = new DbModel();
+            DbViewModel dbViewModel = new DbViewModel();
+            EncryptionViewModel encryptionViewModel = new EncryptionViewModel();
 
             #endregion
 
-            encryptPassword(ref sEncryptedPass);
+            encryptionViewModel.EncryptString(ref sEncryptedPass);
 
-            obj_DbViewModel.generarDataTableParametros(ref obj_DbModel);
+            dbViewModel.GenerarDataTableParametros(ref dbModel);
 
-            DataRow dr1 = obj_DbModel.dtParametros.NewRow();
+            DataRow dr1 = dbModel.dtParametros.NewRow();
             dr1["Nombre"] = "@email";
             dr1["TipoDato"] = "4";
             dr1["Valor"] = authenticationModel.UserName;
 
-            DataRow dr2 = obj_DbModel.dtParametros.NewRow();
+            DataRow dr2 = dbModel.dtParametros.NewRow();
             dr2["Nombre"] = "@s_contrasena";
             dr2["TipoDato"] = "4";
             dr2["Valor"] = sEncryptedPass;
 
-            obj_DbModel.dtParametros.Rows.Add(dr1);
-            obj_DbModel.dtParametros.Rows.Add(dr2);
+            dbModel.dtParametros.Rows.Add(dr1);
+            dbModel.dtParametros.Rows.Add(dr2);
 
-            sNombreTabla = (App.Current as App).TblAuthentication.ToString(); /*ConfigurationManager.AppSettings["NombTablaCarreras"].ToString();*/
-            sNombreSP = (App.Current as App).SpAuthentication.ToString(); /*ConfigurationManager.AppSettings["SPFiltrarCarreras"].ToString();*/
+            sNombreTabla = (App.Current as App).TblAuthentication.ToString();
+            sNombreSP = (App.Current as App).SpAuthentication.ToString();
 
-            obj_DbViewModel.executeFill(sNombreTabla, sNombreSP, ref obj_DbModel/*, obj_DAL_Genericos*/);
+            dbViewModel.ExecuteFill(sNombreTabla, sNombreSP, ref dbModel);
 
-            if (obj_DbModel.sMsjError != string.Empty)
+            if (dbModel.sMsjError != string.Empty)
             {
-                sMsjError = obj_DbModel.sMsjError;
+                sMsjError = dbModel.sMsjError;
                 authenticationModel.UserProfile = String.Empty;
             }
             else
             {
                 sMsjError = string.Empty;
 
-                if (obj_DbModel.DS.Tables[sNombreTabla].Rows.Count > 0)
+                if (dbModel.DS.Tables[sNombreTabla].Rows.Count > 0)
                 {
-                    authenticationModel.UserProfile = obj_DbModel.DS.Tables[sNombreTabla].Rows[0][0].ToString();
+                    authenticationModel.UserProfile = dbModel.DS.Tables[sNombreTabla].Rows[0][0].ToString();
+
+                    if (authenticationModel.UserProfile == "Invalid Credentials")
+                    {
+                        authenticationModel.IsErrorMessageVisible = true;
+                        authenticationModel.UserProfile = "";
+                    }
                 }
                 else
                 {
@@ -67,28 +74,6 @@ namespace Nexxon.ViewModels.Security
                     authenticationModel.IsErrorMessageVisible = true;
                 }
             }
-        }
-
-        private void encryptPassword(ref string sPass)
-        {
-            byte[] key; //Arreglo donde guardaremos la llave para el cifrado 3DES.
-            byte[] array = UTF8Encoding.UTF8.GetBytes(sPass); //Arreglo donde guardaremos la cadena descifrada.
-
-            // Ciframos utilizando el Algoritmo MD5.
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(TOKEN));
-            md5.Clear();
-
-            //Ciframos utilizando el Algoritmo 3DES.
-            TripleDESCryptoServiceProvider tripledes = new TripleDESCryptoServiceProvider();
-            tripledes.Key = key;
-            tripledes.Mode = CipherMode.ECB;
-            tripledes.Padding = PaddingMode.PKCS7;
-            ICryptoTransform convertir = tripledes.CreateEncryptor(); // Iniciamos la conversión de la cadena
-            byte[] resultado = convertir.TransformFinalBlock(array, 0, array.Length); //Arreglo de bytes donde guardaremos la cadena cifrada.
-            tripledes.Clear();
-
-            sPass = Convert.ToBase64String(resultado, 0, resultado.Length); // Convertimos la cadena y la regresamos.
         }
 
         public void OnFirstLoad(ref AuthenticationModel authenticationModel)

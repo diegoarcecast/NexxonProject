@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
 
     <Page.Resources>
         <helper:BoolToVisibility x:Key="boolToVisibility"/>
@@ -53,7 +53,7 @@
 
                                     <TextBox Name="TxtEmailChangePassword"
                                              Header="Correo electrónico"
-                                             PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"
+                                             Text="{Binding UserEmail, Mode=TwoWay}"
                                              IsEnabled="{Binding IsTextBoxEmailChangePasswordEnable}"/>
 
                                     <Button Name="BtnSearch"
@@ -62,30 +62,44 @@
                                             Click="BtnSearch_Click"
                                             Visibility="{Binding IsBtnSearchUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}"/>
 
-                                    <TextBlock Text="Usuario encontrado / Usuario no encontrado"
-                                               VerticalAlignment="Center"/>
-
                                 </StackPanel>
 
-                                <TextBox Name="TxtNewPassword"
-                                         Header="Contraseña"
-                                         PlaceholderText="Ingrese la nueva contraseña"/>
+                                <StackPanel x:Name="FormNewPassword"
+                                            Spacing="10">
 
-                                <TextBox Name="TxtConfirmNewPassword"
-                                         Header="Confirme la contraseña"
-                                         PlaceholderText="Vuelva a ingresar la nueva contraseña"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="La contraseña debe estar compuesta por una combinación de letras mayúsculas, minúsculas y números"
+                                                   TextWrapping="Wrap"
+                                                   VerticalAlignment="Center"/>
+                                        <TextBlock Text="No se aceptan caracteres especiales"
+                                                   TextWrapping="Wrap"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Right"
-                                            Spacing="20">
+                                    <PasswordBox Name="TxtNewPassword"
+                                                 Header="Contraseña"
+                                                 PlaceholderText="Ingrese la nueva contraseña"
+                                                 Password="{Binding UserNewPassword, Mode=TwoWay}"/>
 
-                                    <Button Name="BtnChangePassword"
-                                            Content="Cambiar contraseña"
-                                            Click="BtnChangePassword_Click"/>
+                                    <PasswordBox Name="TxtConfirmNewPassword"
+                                                 Header="Confirme la contraseña"
+                                                 PlaceholderText="Vuelva a ingresar la nueva contraseña"
+                                                 Password="{Binding UserConfirmNewPassword, Mode=TwoWay}"/>
 
-                                    <Button Name="BtnCancelChangePassword"
-                                            Content="Cancelar"
-                                            Click="BtnCancelChangePassword_Click"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                Spacing="20">
+
+                                        <Button Name="BtnChangePassword"
+                                                Content="Cambiar contraseña"
+                                                Click="BtnChangePassword_Click"
+                                                IsEnabled="{Binding IsChangePassButtonEnabled}"/>
+
+                                        <Button Name="BtnCancelChangePassword"
+                                                Content="Cancelar"
+                                                Click="BtnCancelChangePassword_Click"/>
+
+                                    </StackPanel>
 
                                 </StackPanel>
 
@@ -135,74 +149,86 @@
                                            Style="{StaticResource SubtitleTextBlockStyle}"
                                            VerticalAlignment="Center"/>
 
-                                <StackPanel>
+                                <StackPanel Spacing="20">
 
                                     <TextBox Name="TxtEmailEdit"
-                                     Header="Correo electrónico"
-                                     PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+                                             Header="Correo electrónico"
+                                             PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"
+                                             Text="{Binding UserEmail, Mode=TwoWay}"/>
 
-                                    <TextBlock Name="TxtEmailDisclaimerEdit"
-                                               Text="Sólo se aceptan correos de Hotmail.com y Gmail.com"
-                                               HorizontalAlignment="Right"
-                                               FontSize="11"/>
+                                    <Button Name="BtnSearchEditUser"
+                                            Content="Buscar usuario"
+                                            HorizontalAlignment="Stretch"
+                                            Click="BtnSearchEditUser_Click"
+                                            Visibility="{Binding IsBtnSearchUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
-                                <TextBox Name="TxtEmailPasswordEdit"
-                                         Header="Contraseña del correo electrónico"
-                                         PlaceholderText="Ingrese la contraseña del correo electrónico"/>
+                                <PasswordBox Name="TxtEmailPasswordEdit"
+                                             Header="Contraseña del correo electrónico"
+                                             PlaceholderText="Ingrese la contraseña del correo electrónico"
+                                             Password="{Binding NewPasswordEmail, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtNameEdit"
                                          Header="Nombre"
                                          PlaceholderText="Nombre del usuario"
-                                         IsReadOnly="True"/>
+                                         IsReadOnly="True"
+                                         Text="{Binding UserName, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtLastNameEdit"
                                          Header="Apellido(s)"
                                          PlaceholderText="Apellido(s) del funcionario"
-                                         IsReadOnly="True"/>
+                                         IsReadOnly="True"
+                                         Text="{Binding UserLastName, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtIDEdit"
                                          Header="Número de identificación"
                                          PlaceholderText="Ingrese el numero de identificación"
-                                         IsReadOnly="True"/>
+                                         IsReadOnly="True"
+                                         Text="{Binding UserIdNumber, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtAddressEdit" 
                                          Header="Dirección"
-                                         PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+                                         PlaceholderText="Ingrese todas las señas que sean necesarias"
+                                         Text="{Binding UserAddress, Mode=TwoWay}"/>
 
                                 <StackPanel Orientation="Horizontal"
                                             Spacing="28">
 
-                                    <ComboBox Name="CbxProvinceEdit"
+                                    <TextBox Name="CbxProvinceEdit"
                                               Header="Provincia"
                                               Width="236"
-                                              PlaceholderText="Seleccione una provincia"/>
+                                              PlaceholderText="Seleccione una provincia"
+                                             Text="{Binding UserProvince, Mode=TwoWay}"/>
 
-                                    <ComboBox Name="CbxCantonEdit"
+                                    <TextBox Name="CbxCantonEdit"
                                               Width="236"
                                               Header="Cantón"
-                                              PlaceholderText="Seleccione un cantón"/>
+                                              PlaceholderText="Seleccione un cantón"
+                                             Text="{Binding UserCanton, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" 
                                             Spacing="28">
 
-                                    <ComboBox Name="CbxDistrictEdit"
+                                    <TextBox Name="CbxDistrictEdit"
                                               Header="Distrito"
                                               PlaceholderText="Seleccione un distrito"
-                                              Width="236"/>
+                                              Width="236"
+                                             Text="{Binding UserDistrict, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
                                 <TextBox Name="TxtPhoneNumber1Edit" 
                                          Header="Teléfono 1"
-                                         PlaceholderText="Ejemplo: 1234-5678"/>
+                                         PlaceholderText="Ejemplo: 1234-5678"
+                                         Text="{Binding UserPhoneNumberOne, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtPhoneNumber2Edit"
                                          Header="Teléfono 2"
-                                         PlaceholderText="Ejemplo: 1234-5678"/>
+                                         PlaceholderText="Ejemplo: 1234-5678"
+                                         Text="{Binding UserPhoneNumberTwo, Mode=TwoWay}"/>
 
                                 <StackPanel Orientation="Horizontal" 
                                             Spacing="28">
@@ -210,7 +236,11 @@
                                     <ComboBox Name="CbxProfileEdit"
                                               Header="Perfil"
                                               PlaceholderText="Seleccione un perfil"
-                                              Width="236"/>
+                                              Width="236"
+                                              ItemsSource="{Binding ProfilesList, Mode=TwoWay}"
+                                              DisplayMemberPath="UserProfileName"
+                                              SelectedValuePath="UserProfileId"
+                                              SelectedValue="{Binding UserProfileId, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
@@ -241,21 +271,23 @@
             <PivotItem Header="{Binding PivotItemAddUserHeader, Mode=TwoWay}"
                        x:Name="PI_AddUser"
                        Visibility="{Binding IsPivotItemAddUserVisible, Converter={StaticResource boolToVisibility}, Mode=TwoWay}">
+                
+                <StackPanel x:Name="MainPanelAddUser">
 
-                <ScrollViewer VerticalScrollMode="Auto"
+                    <ScrollViewer VerticalScrollMode="Auto"
                               HorizontalScrollMode="Auto"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto"
-                              MaxHeight="700"
+                              MaxHeight="600"
                               MaxWidth="800">
 
                     <controls:DropShadowPanel BlurRadius="24"
-                                  ShadowOpacity="0.7"
-                                  OffsetX="4"
-                                  OffsetY="4"
-                                  Color="Black"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center">
+                                              ShadowOpacity="0.7"
+                                              OffsetX="4"
+                                              OffsetY="4"
+                                              Color="Black"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
 
                         <Border x:Name="AddUser"
                                 Background="White"
@@ -277,8 +309,9 @@
                                 <StackPanel>
 
                                     <TextBox Name="TxtEmail"
-                                     Header="Correo electrónico"
-                                     PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"/>
+                                            Header="Correo electrónico"
+                                            PlaceholderText="Ejemplo: ejemplo@hotmail.com / ejemplo@gmail.com"
+                                             Text="{Binding UserEmail, Mode=TwoWay}"/>
 
                                     <TextBlock Name="TxtEmailDisclaimer"
                                                Text="Sólo se aceptan correos de Hotmail.com y Gmail.com"
@@ -287,72 +320,86 @@
 
                                 </StackPanel>
 
-                                <TextBox Name="TxtEmailPassword"
-                                         Header="Contraseña del correo electrónico"
-                                         PlaceholderText="Ingrese la contraseña del correo electrónico"/>
+                                <PasswordBox Name="TxtEmailPassword"
+                                             Header="Contraseña del correo electrónico"
+                                             PlaceholderText="Ingrese la contraseña del correo electrónico"
+                                             Password="{Binding PasswordEmail, Mode=TwoWay}"/>
 
-                                <TextBox Name="TxtName"
-                                         Header="Nombre"
-                                         PlaceholderText="Ingrese el nombre del usuario"/>
+                                    <TextBox Name="TxtName"
+                                             Header="Nombre"
+                                             PlaceholderText="Ingrese el nombre del usuario"
+                                             Text="{Binding UserName, Mode=TwoWay}"/>
 
-                                <TextBox Name="TxtLastName"
-                                         Header="Apellido(s)"
-                                         PlaceholderText="Ingrese el o los apellidos del funcionario"/>
+                                    <TextBox Name="TxtLastName"
+                                             Header="Apellido(s)"
+                                             PlaceholderText="Ingrese el o los apellidos del funcionario"
+                                             Text="{Binding UserLastName, Mode=TwoWay}"/>
 
-                                <StackPanel Orientation="Horizontal"
-                                        Spacing="20">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="20">
 
                                     <TextBlock Text="Tipo de identificación"
                                                VerticalAlignment="Center"/>
 
-                                    <RadioButton Content="Nacional" 
-                                                 GroupName="GNtypeDNI"/>
+                                    <RadioButton x:Name="RdbtnNational"
+                                                 Content="Nacional" 
+                                                 GroupName="GNtypeDNI" 
+                                                 Checked="RdbtnNational_Checked"/>
 
-                                    <RadioButton Content="Extranjero" 
-                                                 GroupName="GNtypeDNI"/>
+                                    <RadioButton x:Name="RdbtnInternational"
+                                                 Content="Extranjero" 
+                                                 GroupName="GNtypeDNI" 
+                                                 Checked="RdbtnInternational_Checked"/>
 
                                 </StackPanel>
 
                                 <TextBox Name="TxtID"
                                          Header="Número de identificación"
-                                         PlaceholderText="Ingrese el numero de identificación"/>
+                                         PlaceholderText="Número de cédula en formato X-XXXX-XXXX o pasaporte"
+                                         Text="{Binding UserIdNumber, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtAddress" 
                                          Header="Dirección"
-                                         PlaceholderText="Ingrese todas las señas que sean necesarias"/>
+                                         PlaceholderText="Ingrese todas las señas que sean necesarias"
+                                         Text="{Binding UserAddress, Mode=TwoWay}"/>
 
                                 <StackPanel Orientation="Horizontal"
                                             Spacing="28">
 
-                                    <ComboBox Name="CbxProvince"
-                                              Header="Provincia"
-                                              Width="236"
-                                              PlaceholderText="Seleccione una provincia"/>
+                                    <TextBox Name="CbxProvince"
+                                             Header="Provincia"
+                                             Width="236"
+                                             PlaceholderText="Seleccione una provincia"
+                                             Text="{Binding UserProvince, Mode=TwoWay}"/>
 
-                                    <ComboBox Name="CbxCanton"
-                                              Width="236"
-                                              Header="Cantón"
-                                              PlaceholderText="Seleccione un cantón"/>
+                                    <TextBox Name="CbxCanton"
+                                             Width="236"
+                                             Header="Cantón"
+                                             PlaceholderText="Seleccione un cantón"
+                                             Text="{Binding UserCanton, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" 
                                             Spacing="28">
 
-                                    <ComboBox Name="CbxDistrict"
-                                              Header="Distrito"
-                                              PlaceholderText="Seleccione un distrito"
-                                              Width="236"/>
+                                    <TextBox Name="CbxDistrict"
+                                             Header="Distrito"
+                                             PlaceholderText="Seleccione un distrito"
+                                             Width="236"
+                                             Text="{Binding UserDistrict, Mode=TwoWay}"/>
 
                                 </StackPanel>
 
                                 <TextBox Name="TxtPhoneNumber1" 
                                          Header="Teléfono 1"
-                                         PlaceholderText="Ejemplo: 1234-5678"/>
+                                         PlaceholderText="Ejemplo: 1234-5678"
+                                         Text="{Binding UserPhoneNumberOne, Mode=TwoWay}"/>
 
                                 <TextBox Name="TxtPhoneNumber2"
                                          Header="Teléfono 2"
-                                         PlaceholderText="Ejemplo: 1234-5678"/>
+                                         PlaceholderText="Ejemplo: 1234-5678"
+                                         Text="{Binding UserPhoneNumberTwo, Mode=TwoWay}"/>
 
                                 <StackPanel Orientation="Horizontal" 
                                             Spacing="28">
@@ -360,7 +407,11 @@
                                     <ComboBox Name="CbxProfile"
                                               Header="Perfil"
                                               PlaceholderText="Seleccione un perfil"
-                                              Width="236"/>
+                                              Width="236"
+                                              ItemsSource="{Binding ProfilesList, Mode=TwoWay}"
+                                              DisplayMemberPath="UserProfileName"
+                                              SelectedValuePath="UserProfileId"
+                                              SelectionChanged="CbxProfile_SelectionChanged"/>
 
                                 </StackPanel>
 
@@ -385,6 +436,8 @@
                     </controls:DropShadowPanel>
 
                 </ScrollViewer>
+                    
+                </StackPanel>
 
             </PivotItem>
             

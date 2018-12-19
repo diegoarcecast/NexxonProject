@@ -15,6 +15,7 @@ namespace Nexxon.Views
     public sealed partial class LoginPage : Page
     {
         AuthenticationModel authenticationModel = new AuthenticationModel();
+        AutorizationModel autorizationModel = new AutorizationModel();
 
         public LoginPage()
         {
@@ -23,16 +24,16 @@ namespace Nexxon.Views
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Move this when MVVM is implemented.
             string sError = "";
             AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
 
-
-            authenticationViewModel.authenticateUser(ref authenticationModel, ref sError);
+            authenticationViewModel.AuthenticateUser(ref authenticationModel, ref sError);
 
             if (authenticationModel.UserProfile != string.Empty)
             {
-                Frame.Navigate(typeof(MainPage), authenticationModel.UserProfile, new DrillInNavigationTransitionInfo());
+                autorizationModel.UserEmail = authenticationModel.UserName;
+                autorizationModel.UserProfile = authenticationModel.UserProfile;
+                Frame.Navigate(typeof(MainPage), autorizationModel, new DrillInNavigationTransitionInfo());
             }
         }
 

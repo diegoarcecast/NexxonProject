@@ -9,6 +9,20 @@ namespace Nexxon.Models.Security
 {
     public class AutorizationModel : MainModel
     {
+        private string _userEmail;
+        public string UserEmail
+        {
+            get
+            {
+                return _userEmail;
+            }
+            set
+            {
+                _userEmail = value;
+                OnPropertyChanged("UserEmail");
+            }
+        }
+
         private string _userPrifle;
         public string UserProfile
         {

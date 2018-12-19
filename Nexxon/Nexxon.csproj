@@ -101,17 +101,23 @@
     <Compile Include="Models\MenuItems.cs" />
     <Compile Include="Models\Security\AuthenticationModel.cs" />
     <Compile Include="Models\Security\AutorizationModel.cs" />
+    <Compile Include="Models\Security\PasswordRecoveryModel.cs" />
     <Compile Include="Models\Security\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Cat_Mant\DbViewModel.cs" />
     <Compile Include="ViewModels\Security\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Security\AuthorizationViewModel.cs" />
+    <Compile Include="ViewModels\Security\EncryptionViewModel.cs" />
+    <Compile Include="ViewModels\Security\PasswordRecoveryViewModel.cs" />
     <Compile Include="ViewModels\Security\UsersViewModel.cs" />
     <Compile Include="Views\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Administration\AdministrationPage.xaml.cs">
       <DependentUpon>AdministrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Administration\AdministrationResultDialog.xaml.cs">
+      <DependentUpon>AdministrationResultDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Agenda\AgendaPage.xaml.cs">
       <DependentUpon>AgendaPage.xaml</DependentUpon>
@@ -213,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Administration\AdministrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Administration\AdministrationResultDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
