@@ -83,6 +83,21 @@ namespace Nexxon
 
         private string _spCreateUser = "spAgregarUsuario";
         public string SpCreateUser { get => _spCreateUser; }
+
+        private string _spCreateCustomerRecord = "spAgregarExpediente";
+        public string SpCreateCustomerRecord { get => _spCreateCustomerRecord; }
+
+        private string _spSearchAllRecords = "spListarExpedientesExistentes";
+        public string SpSearchAllRecords { get => _spSearchAllRecords; }
+
+        private string _spSearchSpecificRecord = "spListarExpediente";
+        public string SpSearchSpecificRecord { get => _spSearchSpecificRecord; }
+
+        private string _tblCustomerRecords = "T_EXPEDIENTE";
+        public string TblCustomerRecords { get => _tblCustomerRecords; }
+
+        private string _spEditCustomerRecord = "spEditarExpediente";
+        public string SpEditCustomerRecord { get => _spEditCustomerRecord; }
         #endregion
 
     }

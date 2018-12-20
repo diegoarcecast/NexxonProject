@@ -14,20 +14,19 @@ namespace Nexxon.Views.Records
             this.InitializeComponent();
         }
 
-        private async void BtnAddClient_Click(object sender, RoutedEventArgs e)
+        private void BtnAddClient_Click(object sender, RoutedEventArgs e)
         {
-            var recordsDialog = new RecordsDialog();
-            await recordsDialog.ShowAsync();
+            //var recordsDialog = new RecordsDialog();
+            //await recordsDialog.ShowAsync();
 
-            if (recordsDialog.BResult == 1)
-            {
-                this.Frame.Navigate(typeof(Records.AddCase), null, new DrillInNavigationTransitionInfo());
-            }
-            else
-            {
-                this.Frame.Navigate(typeof(Records.AddClient), null, new DrillInNavigationTransitionInfo());
-            }
-
+            //if (recordsDialog.BResult == 1)
+            //{
+            //    this.Frame.Navigate(typeof(Records.AddCase), null, new DrillInNavigationTransitionInfo());
+            //}
+            //else
+            //{
+            //    this.Frame.Navigate(typeof(Records.AddClient), null, new DrillInNavigationTransitionInfo());
+            //}
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

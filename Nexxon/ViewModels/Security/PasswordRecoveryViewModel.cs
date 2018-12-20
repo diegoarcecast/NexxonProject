@@ -12,7 +12,7 @@ namespace Nexxon.ViewModels.Security
     {
         public void RecoverPassword(ref PasswordRecoveryModel passwordRecoveryModel)
         {
-            MailMessage mail = new MailMessage("you@yourcompany.com", "user@hotmail.com");
+            MailMessage mail = new MailMessage(passwordRecoveryModel.UserEmail, "user@hotmail.com");
             SmtpClient client = new SmtpClient();
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;

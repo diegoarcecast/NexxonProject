@@ -288,92 +288,89 @@ namespace Nexxon.ViewModels.Cat_Mant
         /// Metodo para Ejecutar insertar datos de las Tablas cuya PK es IDENTITY
         /// </summary>
         /// <param name="sNombreSP">Stored procedure que se llamara</param>
-        /// <param name="obj_DAL_BD">Objeto de tipo cls_DAL_BaseDeDatos</param>
-        /// <param name="obj_DAL_Genericos">Objeto de tipo cls_DAL_Genericos</param>
-        //public void executeScalar(string sNombreSP,
-        //                            ref DbModel obj_DAL_BD, cls_DAL_Genericos obj_DAL_Genericos, ref string sResultado)
-        //{
-        //    try
-        //    {
-        //        traerConexion(ref obj_DAL_BD);
-        //        abrirConexion(ref obj_DAL_BD);
+        /// <param name="dbModel">Objeto de tipo DbModel</param>
+        /// <param name="sResult">String para devolver el resultado del insert</param>
+        public void ExecuteScalar(string sNombreSP, ref DbModel dbModel, ref string sResult)
+        {
+            try
+            {
+                GetConnection(ref dbModel);
+                OpenConnection(ref dbModel);
 
-        //        obj_DAL_BD.CMD = new SqlCommand(sNombreSP, obj_DAL_BD.CNX);
-        //        obj_DAL_BD.CMD.CommandType = CommandType.StoredProcedure;
+                dbModel.CMD = new SqlCommand(sNombreSP, dbModel.CNX);
+                dbModel.CMD.CommandType = CommandType.StoredProcedure;
 
-        //        foreach (DataRow dr in obj_DAL_Genericos.dtParametros.Rows)
-        //        {
-        //            switch (dr["TipoDato"].ToString())
-        //            {
-        //                case "1":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "2":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "3":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "4":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "5":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "6":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "7":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                case "8":
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //                default:
-        //                    {
-        //                        obj_DAL_BD.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
-        //                    }
-        //                    break;
-        //            }
-        //        }
+                foreach (DataRow dr in dbModel.dtParametros.Rows)
+                {
+                    switch (dr["TipoDato"].ToString())
+                    {
+                        case "1":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Int).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "2":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Char).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "3":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "4":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "5":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.NVarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "6":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.DateTime).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "7":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Bit).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "8":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        default:
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                    }
+                }
 
-        //        sResultado = obj_DAL_BD.CMD.ExecuteScalar().ToString();
+                sResult = dbModel.CMD.ExecuteScalar().ToString();
 
-        //        obj_DAL_BD.bBanderaError = false;
-        //        obj_DAL_BD.sMsjError = string.Empty;
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        obj_DAL_BD.bBanderaError = true;
-        //        obj_DAL_BD.sMsjError = ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        if (obj_DAL_BD.CNX.State == ConnectionState.Open)
-        //        {
-        //            obj_DAL_BD.CNX.Close();
-        //            obj_DAL_BD.CNX.Dispose();
-        //            obj_DAL_BD.bBanderaError = false;
-        //            obj_DAL_BD.sMsjError = string.Empty;
-        //        }
-        //    }
-        //}
+                dbModel.bBanderaError = false;
+                dbModel.sMsjError = string.Empty;
+            }
+            catch (SqlException ex)
+            {
+                dbModel.bBanderaError = true;
+                dbModel.sMsjError = ex.Message.ToString();
+            }
+            finally
+            {
+                if (dbModel.CNX.State == ConnectionState.Open)
+                {
+                    dbModel.CNX.Close();
+                    dbModel.CNX.Dispose();
+                }
+            }
+        }
 
         /// <summary>
         /// Metodo para llenar el DT de parametros

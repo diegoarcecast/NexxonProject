@@ -17,26 +17,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Nexxon.Views.Records
 {
-    public sealed partial class RecordsDialog : ContentDialog
+    public sealed partial class NewRecordResultDialog : ContentDialog
     {
-        private byte bResult;
-
-        public RecordsDialog()
+        public NewRecordResultDialog(string Message, string recordNumber)
         {
             this.InitializeComponent();
-            
+            txtResult.Text = Message;
+            txtRecordNumber.Text = recordNumber;
         }
-
-        public byte BResult { get => bResult;  }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            bResult = 1;
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            bResult = 0;
+            
         }
     }
 }
