@@ -99,6 +99,7 @@
     <Compile Include="Models\Cat_Mant\DbModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MenuItems.cs" />
+    <Compile Include="Models\Records\CasesModel.cs" />
     <Compile Include="Models\Records\RecordsModel.cs" />
     <Compile Include="Models\Security\AuthenticationModel.cs" />
     <Compile Include="Models\Security\AutorizationModel.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Models\Security\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Cat_Mant\DbViewModel.cs" />
+    <Compile Include="ViewModels\Records\CasesViewModel.cs" />
     <Compile Include="ViewModels\Records\RecordsViewModel.cs" />
     <Compile Include="ViewModels\Security\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Security\AuthorizationViewModel.cs" />
@@ -166,11 +168,11 @@
     <Compile Include="Views\Records\CheckCase.xaml.cs">
       <DependentUpon>CheckCase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Records\CreateCaseDialog.xaml.cs">
-      <DependentUpon>CreateCaseDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Records\EditClient.xaml.cs">
       <DependentUpon>EditClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Records\NewCaseResultDialog.xaml.cs">
+      <DependentUpon>NewCaseResultDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Records\NewRecordResultDialog.xaml.cs">
       <DependentUpon>NewRecordResultDialog.xaml</DependentUpon>
@@ -291,11 +293,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Records\CreateCaseDialog.xaml">
+    <Page Include="Views\Records\EditClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Records\EditClient.xaml">
+    <Page Include="Views\Records\NewCaseResultDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

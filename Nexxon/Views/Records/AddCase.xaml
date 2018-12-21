@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Nexxon.Views.Records"
     xmlns:helper="using:Nexxon.Helpers"
+    xmlns:model="using:Nexxon.Models.Records"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -16,39 +17,42 @@
 
     <Grid>
         <StackPanel x:Name="FormStackPanel"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Width="500">
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="500">
 
             <TextBlock Text="Añadir información de caso" 
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    VerticalAlignment="Center"/>
 
             <ScrollViewer VerticalScrollMode="Enabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  MaxHeight="260">
+                          VerticalScrollBarVisibility="Auto"
+                          MaxHeight="260">
+                
                 <StackPanel Spacing="20">
 
                     <TextBox Name="TxtRecordNumber"
-                                     Header="Número de expediente"
-                                     PlaceholderText="Número de expediente"
-                                     IsReadOnly="True"/>
+                             Header="Número de expediente"
+                             PlaceholderText="Número de expediente"
+                             Text="{Binding IdCustomerRecord, Mode=TwoWay}"
+                             IsReadOnly="True"/>
 
                     <TextBox Name="TxtCaseNumber"
-                                     Header="Número de caso interno"
-                                     PlaceholderText="El numero de caso se generará de manera automatica"
-                                     IsReadOnly="True"/>
+                             Header="Número de caso interno"
+                             PlaceholderText="El numero de caso se generará de manera automatica"
+                             Text="{Binding InternalCaseNumber, Mode=TwoWay}"
+                             IsReadOnly="True"/>
 
-                    <StackPanel Orientation="Horizontal" 
-                                        Spacing="20">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="20">
 
                         <TextBlock Text="Tipo de caso"
-                                           VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
 
                         <RadioButton x:Name="rdbtnNotary" 
-                                             Content="Notarial"
-                                             GroupName="CaseGroup"
-                                             Checked="rdbtnNotary_Checked"/>
+                                     Content="Notarial"
+                                     GroupName="CaseGroup"
+                                     Checked="rdbtnNotary_Checked"/>
 
                         <RadioButton x:Name="rdbtnJudicial"
                                      Content="Judicial"
@@ -59,67 +63,66 @@
                     </StackPanel>
 
                     <ComboBox x:Name="CbxCaseType"
-                                      Header="Tipo de caso"
-                                      PlaceholderText="Seleccione un tipo de caso"
-                                      HorizontalAlignment="Stretch">
-
-                        <ComboBoxItem Content="Penal"/>
-                        <ComboBoxItem Content="Familiar"/>
-                        <ComboBoxItem Content="Judicial"/>
-                        <ComboBoxItem Content="Laboral"/>
-
-                    </ComboBox>
+                              Header="Tipo de caso"
+                              PlaceholderText="Seleccione un tipo de caso"
+                              HorizontalAlignment="Stretch"
+                              ItemsSource="{Binding ServicesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="DescriptionCaseService"
+                              SelectedValuePath="IdCaseService"
+                              SelectedValue="{Binding IdCaseService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBox Name="TxtTitle"
-                                     Header="Título"
-                                     PlaceholderText="Ingrese un título para el caso"/>
+                             Header="Título"
+                             PlaceholderText="Ingrese un título para el caso"
+                             Text="{Binding CaseTitle,Mode=TwoWay}"/>
 
                     <TextBox x:Name="TxtSuePartyName"
-                                     Header="Nombre del demandado"
-                                     PlaceholderText="Ingrese el nombre del demandado"/>
+                             Header="Nombre del demandado"
+                             PlaceholderText="Ingrese el nombre del demandado"
+                             Text="{Binding SuedPartyName,Mode=TwoWay}"/>
 
                     <TextBox x:Name="TxtSuePartyID"
-                                     Header="Identificación del demandado"
-                                     PlaceholderText="Ingrese el numero de idntificación del demandado"/>
+                             Header="Identificación del demandado"
+                             PlaceholderText="Ingrese el numero de idntificación del demandado"
+                             Text="{Binding SuedPartyIdNumber,Mode=TwoWay}"/>
 
-                    <AutoSuggestBox Name="ASBJuzgado"
-                                            Header="Juzgado"
-                                            PlaceholderText="Ingrese el nombre del juzgado"
-                                            QueryIcon="Find"/>
+                    <TextBox Name="TxtJuzgado"
+                             Header="Juzgado"
+                             PlaceholderText="Ingrese el nombre del juzgado"
+                             Text="{Binding JudicialCircuit,Mode=TwoWay}"/>
 
                     <TextBox x:Name="TxtLegalOfficeID"
-                                     Header="Número de expediente del juzgado"
-                                     PlaceholderText="Ingrese el numero de expediente del juzgado"/>
+                             Header="Número de expediente del juzgado"
+                             PlaceholderText="Ingrese el numero de expediente del juzgado"
+                             Text="{Binding JudicialCircuitCaseNumber,Mode=TwoWay}"/>
 
                     <DatePicker Name="DPStartDate"
-                                        Header="Seleccione la fecha de inicio" 
-                                        MaxWidth="500"
-                                        HorizontalAlignment="Stretch"/>
+                                Header="Seleccione la fecha de inicio"
+                                MaxWidth="500"
+                                HorizontalAlignment="Stretch"
+                                Date="{Binding CaseStartDate,Mode=TwoWay}"/>
 
                     <TextBox Name="TxtAmount"
-                                     Header="Honorarios"
-                                     PlaceholderText="Ingrese el monto a cobrar"/>
+                             Header="Honorarios"
+                             PlaceholderText="Ingrese el monto a cobrar"
+                             Text="{Binding ProfessionalFees,Mode=TwoWay}" KeyDown="TxtAmount_KeyDown"/>
 
-                    <TextBox Name="TxtPayments"
-                                      Header="Pagos"
-                                      Text="Después de crear el caso podrá agregar un pago"/>
+                    <TextBlock Name="TxtPayments"
+                               Text="Después de crear el caso podrá agregar un pago"/>
 
                     <ComboBox Name="CbxStatus"
-                                      Header="Estado de expediente"
-                                      PlaceholderText="Seleccione una opción"
-                                      HorizontalAlignment="Stretch">
+                              Header="Estado de expediente"
+                              PlaceholderText="Seleccione una opción"
+                              HorizontalAlignment="Stretch"
+                              ItemsSource="{Binding StatusList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="DescriptionCaseStatus"
+                              SelectedValuePath="IdCaseStatus"
+                              SelectedValue="{Binding IdCaseStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <ComboBoxItem Content="Elaboración"/>
-                        <ComboBoxItem Content="Entregado"/>
-                        <ComboBoxItem Content="En trámite"/>
-                        <ComboBoxItem Content="Finalizado"/>
-
-                    </ComboBox>
-
-                    <Button Name="BtnAddFiles" 
-                                    Content="Añadir archivo"
-                                    HorizontalAlignment="Stretch"
-                                    Click="BtnAddFiles_Click"/>
+                    <Button Name="BtnAddFiles"
+                            Content="Añadir archivo"
+                            HorizontalAlignment="Stretch"
+                            Click="BtnAddFiles_Click"/>
 
                     <TextBlock x:Name="txtAttachedFiles"/>
                 </StackPanel>
@@ -127,14 +130,16 @@
             </ScrollViewer>
 
             <StackPanel Orientation="Horizontal"
-                                Spacing="20"
-                                HorizontalAlignment="Right">
+                        Spacing="20"
+                        HorizontalAlignment="Right">
 
                 <Button Name="BtnAddCase" 
-                                Content="Crear caso"/>
+                        Content="Crear caso"
+                        Click="BtnAddCase_Click"/>
 
-                <Button Name="BtnCancel" 
-                                Content="Cancelar" Click="BtnCancel_Click"/>
+                <Button Name="BtnCancel"
+                        Content="Cancelar"
+                        Click="BtnCancel_Click"/>
             </StackPanel>
 
         </StackPanel>

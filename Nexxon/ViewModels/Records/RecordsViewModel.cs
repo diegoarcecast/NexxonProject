@@ -13,6 +13,8 @@ namespace Nexxon.ViewModels.Records
 {
     public class RecordsViewModel
     {
+        #region Customer Records
+
         public void CreateNewCustomerRecord(ref string sMessage, ref RecordsModel recordsModel)
         {
             #region Local variables
@@ -376,6 +378,148 @@ namespace Nexxon.ViewModels.Records
                 }
             }
         }
+
+        #endregion
+
+
+        #region Customer Cases
+
+        public void CreateNewCase(ref string sMessage, ref RecordsModel recordsModel)
+        {
+            #region Local variables
+
+            string sNombreSP, sResult = string.Empty;
+
+            DbModel dbModel = new DbModel();
+            DbViewModel dbViewModel = new DbViewModel();
+
+            #endregion
+            if (recordsModel.CustomerEmail is null || !IsCustomerEmailGood(recordsModel.CustomerEmail))
+            {
+                sMessage = "Por favor verifique que el correo electrónico se haya ingresado en el formato correcto";
+            }
+            else if (recordsModel.CustomerName == string.Empty || recordsModel.CustomerName is null ||
+                     recordsModel.CustomerLastName == string.Empty || recordsModel.CustomerLastName is null)
+            {
+                sMessage = "Por favor ingrese el nombre y apellido(s) del cliente";
+            }
+            else if (recordsModel.CustomerIdType == "Nacional" && !IsIdNumberGood(recordsModel.CustomerIdNumber))
+            {
+                sMessage = "Por favor verifique que el número de identificación se haya ingresado en el formato correcto";
+            }
+            else if (recordsModel.CustomerAddress == string.Empty || recordsModel.CustomerAddress is null ||
+                     recordsModel.CustomerProvince == string.Empty || recordsModel.CustomerProvince is null ||
+                     recordsModel.CustomerCanton == string.Empty || recordsModel.CustomerCanton is null ||
+                     recordsModel.CustomerDistrict == string.Empty || recordsModel.CustomerDistrict is null)
+            {
+                sMessage = "Por favor ingrese una dirección de residencia";
+            }
+            else if (recordsModel.CustomerPhoneNumberOne == string.Empty || recordsModel.CustomerPhoneNumberOne is null || !(IsPhoneNumberGood(recordsModel.CustomerPhoneNumberOne)))
+            {
+                sMessage = "Por favor verifique que el número telefónico se haya ingresado en el formato correcto";
+            }
+            else if (recordsModel.CustomerPhoneNumberTwo != string.Empty && !(recordsModel.CustomerPhoneNumberTwo is null) && !IsPhoneNumberGood(recordsModel.CustomerPhoneNumberTwo))
+            {
+                sMessage = "Por favor verifique que el número telefónico se haya ingresado en el formato correcto";
+            }
+            else
+            {
+                if (recordsModel.CustomerPhoneNumberTwo is null)
+                {
+                    recordsModel.CustomerPhoneNumberTwo = "";
+                }
+
+                #region Create SP parameters
+                dbViewModel.GenerarDataTableParametros(ref dbModel);
+
+                DataRow dr1 = dbModel.dtParametros.NewRow();
+                dr1["Nombre"] = "@id_buf";
+                dr1["TipoDato"] = "9";
+                dr1["Valor"] = recordsModel.IdBuffet;
+
+                DataRow dr2 = dbModel.dtParametros.NewRow();
+                dr2["Nombre"] = "@nombre";
+                dr2["TipoDato"] = "4";
+                dr2["Valor"] = recordsModel.CustomerName;
+
+                DataRow dr3 = dbModel.dtParametros.NewRow();
+                dr3["Nombre"] = "@apellidos";
+                dr3["TipoDato"] = "4";
+                dr3["Valor"] = recordsModel.CustomerLastName;
+
+                DataRow dr4 = dbModel.dtParametros.NewRow();
+                dr4["Nombre"] = "@ced";
+                dr4["TipoDato"] = "4";
+                dr4["Valor"] = recordsModel.CustomerIdNumber;
+
+                DataRow dr5 = dbModel.dtParametros.NewRow();
+                dr5["Nombre"] = "@direccion";
+                dr5["TipoDato"] = "4";
+                dr5["Valor"] = recordsModel.CustomerAddress;
+
+                DataRow dr6 = dbModel.dtParametros.NewRow();
+                dr6["Nombre"] = "@provincia";
+                dr6["TipoDato"] = "4";
+                dr6["Valor"] = recordsModel.CustomerProvince;
+
+                DataRow dr7 = dbModel.dtParametros.NewRow();
+                dr7["Nombre"] = "@canton";
+                dr7["TipoDato"] = "4";
+                dr7["Valor"] = recordsModel.CustomerCanton;
+
+                DataRow dr8 = dbModel.dtParametros.NewRow();
+                dr8["Nombre"] = "@distrito";
+                dr8["TipoDato"] = "4";
+                dr8["Valor"] = recordsModel.CustomerDistrict;
+
+                DataRow dr9 = dbModel.dtParametros.NewRow();
+                dr9["Nombre"] = "@email";
+                dr9["TipoDato"] = "4";
+                dr9["Valor"] = recordsModel.CustomerEmail;
+
+                DataRow dr10 = dbModel.dtParametros.NewRow();
+                dr10["Nombre"] = "@tel1";
+                dr10["TipoDato"] = "4";
+                dr10["Valor"] = recordsModel.CustomerPhoneNumberOne;
+
+                DataRow dr11 = dbModel.dtParametros.NewRow();
+                dr11["Nombre"] = "@tel2";
+                dr11["TipoDato"] = "4";
+                dr11["Valor"] = recordsModel.CustomerPhoneNumberTwo;
+
+
+                dbModel.dtParametros.Rows.Add(dr1);
+                dbModel.dtParametros.Rows.Add(dr2);
+                dbModel.dtParametros.Rows.Add(dr3);
+                dbModel.dtParametros.Rows.Add(dr4);
+                dbModel.dtParametros.Rows.Add(dr5);
+                dbModel.dtParametros.Rows.Add(dr6);
+                dbModel.dtParametros.Rows.Add(dr7);
+                dbModel.dtParametros.Rows.Add(dr8);
+                dbModel.dtParametros.Rows.Add(dr9);
+                dbModel.dtParametros.Rows.Add(dr10);
+                dbModel.dtParametros.Rows.Add(dr11);
+
+                #endregion
+
+                #region Execute SP
+                sNombreSP = (App.Current as App).SpCreateCustomerRecord.ToString();
+
+                dbViewModel.ExecuteScalar(sNombreSP, ref dbModel, ref sResult);
+
+                if (dbModel.sMsjError != string.Empty)
+                {
+                    sMessage = dbModel.sMsjError;
+                }
+                else
+                {
+                    recordsModel.RecordId = Convert.ToInt32(sResult);
+                }
+                #endregion
+            }
+        }
+        
+        #endregion
 
         private bool IsCustomerEmailGood(string UserEmail)
         {

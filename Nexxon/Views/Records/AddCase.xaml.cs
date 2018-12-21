@@ -8,12 +8,17 @@ namespace Nexxon.Views.Records
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Media.Animation;
     using Nexxon.Models.Security;
+    using Nexxon.Models.Records;
     using Nexxon.ViewModels.Security;
+    using Nexxon.ViewModels.Records;
     using Windows.UI.Xaml.Navigation;
+    using System.Collections.Generic;
+    using System.Globalization;
 
     public sealed partial class AddCase : Page
     {
         private string profile;
+        CasesModel casesModel = new CasesModel();
 
         public AddCase()
         {
@@ -25,30 +30,49 @@ namespace Nexxon.Views.Records
             AutorizationModel authorizationModel = new AutorizationModel();
             AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
 
-            this.profile = e.Parameter.ToString();
+            var parameterList = e.Parameter as List<string>;
+
+            profile = parameterList[0];
+            casesModel.IdCustomerRecord = Convert.ToInt32(parameterList[1]);
 
             authorizationModel.UserProfile = this.profile;
 
             this.DataContext = authorizationModel;
+            FormStackPanel.DataContext = casesModel;
+            rdbtnJudicial.DataContext = authorizationModel;
 
             authorizationViewModel.CreateCasePermissions(ref authorizationModel);
+
+            rdbtnNotary.IsChecked = true;
         }
 
         private void rdbtnNotary_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            CbxCaseType.Visibility = Visibility.Collapsed;
+            CasesViewModel casesViewModel = new CasesViewModel();
+            string errorMessage = string.Empty;
+            
+            casesModel.IdServiceArea = 2;
+
+            casesViewModel.LoadServices(ref errorMessage, ref casesModel);
+
             TxtSuePartyName.Visibility = Visibility.Collapsed;
             TxtSuePartyID.Visibility = Visibility.Collapsed;
-            ASBJuzgado.Visibility = Visibility.Collapsed;
+            TxtJuzgado.Visibility = Visibility.Collapsed;
             TxtLegalOfficeID.Visibility = Visibility.Collapsed;
         }
 
         private void rdbtnJudicial_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            CbxCaseType.Visibility = Visibility.Visible;
+            CasesViewModel casesViewModel = new CasesViewModel();
+            string errorMessage = string.Empty;
+
+            casesModel.IdServiceArea = 1;
+
+            casesViewModel.LoadServices(ref errorMessage, ref casesModel);
+
             TxtSuePartyName.Visibility = Visibility.Visible;
             TxtSuePartyID.Visibility = Visibility.Visible;
-            ASBJuzgado.Visibility = Visibility.Visible;
+            TxtJuzgado.Visibility = Visibility.Visible;
             TxtLegalOfficeID.Visibility = Visibility.Visible;
         }
 
@@ -89,12 +113,73 @@ namespace Nexxon.Views.Records
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            rdbtnNotary.IsChecked = true;
+            string _errorMessage = "";
+
+            CasesViewModel casesViewModel = new CasesViewModel();
+
+            casesViewModel.LoadCasesStatus(ref _errorMessage, ref casesModel);
+
+            casesModel.CaseStartDate = DateTime.Today;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Content = null;
+            this.DataContext = null;
+        }
+
+        private async void BtnAddCase_Click(object sender, RoutedEventArgs e)
+        {
+            string Message = "", caseId = "";
+
+            CasesViewModel casesViewModel = new CasesViewModel();
+
+            casesViewModel.CreateNewCase(ref Message, ref casesModel);
+
+            if (Message != string.Empty)
+            {
+                var newCaseResultDialog = new NewCaseResultDialog(Message, "");
+                await newCaseResultDialog.ShowAsync();
+            }
+            else
+            {
+                Message = "El caso se creó de manera exitosa";
+                caseId = "Número de caso: " + casesModel.InternalCaseNumber;
+
+                var newRecordResultDialog = new NewRecordResultDialog(Message, caseId);
+                await newRecordResultDialog.ShowAsync();
+
+                this.Frame.Content = null;
+                this.DataContext = null;
+            }
+        }
+
+        private void TxtAmount_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key.ToString().Equals("Back"))
+            {
+                e.Handled = false;
+                return;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (e.Key.ToString() == string.Format("Number{0}", i))
+                {
+                    e.Handled = false;
+                    return;
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (e.Key.ToString() == string.Format("NumberPad{0}", i))
+                {
+                    e.Handled = false;
+                    return;
+                }
+            }
+            e.Handled = true;
         }
     }
 }

@@ -60,14 +60,23 @@
                                           MaxHeight="100"
                                           Header="Expedientes"
                                           SelectedValue="{Binding RecordId, Mode=TwoWay}"
-                                          IsItemClickEnabled="True" SelectionChanged="LV_CheckRecords_SelectionChanged">
+                                          IsItemClickEnabled="True"
+                                          SelectionChanged="LV_CheckRecords_SelectionChanged">
 
                                 </ListView>
 
                                 <ListView Name="LstVCases"
-                                          Header="Casos vinculados al expediente"/>
+                                          Header="Casos vinculados al expediente"
+                                          ItemsSource="{Binding CasesList, Mode=TwoWay}"
+                                          DisplayMemberPath="InternalCaseNumber"
+                                          SelectedValuePath="InternalCaseNumber"
+                                          SelectionMode="Single"
+                                          MaxHeight="100"
+                                          SelectedValue="{Binding InternalCaseNumber, Mode=TwoWay}"
+                                          IsItemClickEnabled="True"/>
 
-                                <StackPanel Orientation="Horizontal"
+                                <StackPanel x:Name="formCheckCaseButtons"
+                                            Orientation="Horizontal"
                                             Spacing="20"
                                             HorizontalAlignment="Right">
 

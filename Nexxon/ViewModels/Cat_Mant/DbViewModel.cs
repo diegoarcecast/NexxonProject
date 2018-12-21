@@ -157,7 +157,12 @@ namespace Nexxon.ViewModels.Cat_Mant
                                 break;
                             case "8":
                                 {
-                                    dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
+                                }
+                                break;
+                            case "9":
+                                {
+                                    dbModel.DAP.SelectCommand.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.TinyInt).Value = dr["Valor"].ToString();
                                 }
                                 break;
                             default:
@@ -185,8 +190,6 @@ namespace Nexxon.ViewModels.Cat_Mant
                 {
                     dbModel.CNX.Close();
                     dbModel.CNX.Dispose();
-                    dbModel.bBanderaError = false;
-                    dbModel.sMsjError = string.Empty;
                 }
 
             }
@@ -344,6 +347,16 @@ namespace Nexxon.ViewModels.Cat_Mant
                                 dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Decimal).Value = dr["Valor"].ToString();
                             }
                             break;
+                        case "9":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.TinyInt).Value = dr["Valor"].ToString();
+                            }
+                            break;
+                        case "10":
+                            {
+                                dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.Money).Value = dr["Valor"].ToString();
+                            }
+                            break;
                         default:
                             {
                                 dbModel.CMD.Parameters.Add(dr["Nombre"].ToString(), SqlDbType.VarChar).Value = dr["Valor"].ToString();
@@ -359,8 +372,16 @@ namespace Nexxon.ViewModels.Cat_Mant
             }
             catch (SqlException ex)
             {
-                dbModel.bBanderaError = true;
-                dbModel.sMsjError = ex.Message.ToString();
+                if (ex.Number == 2627)
+                {
+                    dbModel.bBanderaError = true;
+                    dbModel.sMsjError = "El registro ya existe";
+                }
+                else
+                {
+                    dbModel.bBanderaError = true;
+                    dbModel.sMsjError = ex.Message.ToString();
+                }
             }
             finally
             {

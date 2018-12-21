@@ -98,6 +98,30 @@ namespace Nexxon
 
         private string _spEditCustomerRecord = "spEditarExpediente";
         public string SpEditCustomerRecord { get => _spEditCustomerRecord; }
+
+        private string _spListServices = "spListarServicio";
+        public string SpListServices { get => _spListServices; }
+
+        private string _tblServices = "T_SERVICIO";
+        public string TblServices { get => _tblServices; }
+
+        private string _spAddNewCase = "spAgregarCaso";
+        public string SpAddNewCase { get => _spAddNewCase; }
+
+        private string _spListPossibleCaseStatus = "spListarEstadosParaCasos";
+        public string SpListPossibleCaseStatus { get => _spListPossibleCaseStatus; }
+
+        private string _tblStatus = "T_ESTADO";
+        public string TblStatus { get => _tblStatus; }
+
+        private string _spListCustomerCases = "spListarCasosExistentes";
+        public string SpListCustomerCases { get => _spListCustomerCases; }
+
+        private string _spListSpecificCase = "spListarCaso";
+        public string SpListSpecificCase { get => _spListSpecificCase; }
+
+        private string _tblCases = "T_CASO";
+        public string TblCases { get => _tblCases; }
         #endregion
 
     }

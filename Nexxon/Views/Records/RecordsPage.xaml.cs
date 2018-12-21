@@ -11,6 +11,7 @@ namespace Nexxon.Views.Records
     using Nexxon.ViewModels.Security;
     using Nexxon.ViewModels.Records;
     using Nexxon.Models.Records;
+    using System.Collections.Generic;
 
     public sealed partial class RecordsPage : Page
     {
@@ -18,6 +19,7 @@ namespace Nexxon.Views.Records
         RecordsModel newRecord = new RecordsModel();
         RecordsModel editRecord = new RecordsModel();
         RecordsModel checkRecord = new RecordsModel();
+        CasesModel casesModel = new CasesModel();
         AuthenticationModel authenticationModel = new AuthenticationModel();
         AutorizationModel authorizationModel = new AutorizationModel();
         AuthorizationViewModel authorizationViewModel = new AuthorizationViewModel();
@@ -36,13 +38,24 @@ namespace Nexxon.Views.Records
             PI_CreateRecords.DataContext = newRecord;
             PI_UpdateRecords.DataContext = editRecord;
             PI_CheckRecords.DataContext = checkRecord;
+            formCheckCaseButtons.DataContext = authorizationModel;
+            LstVCases.DataContext = casesModel;
 
             authorizationViewModel.RecordsPagePermissions(ref authorizationModel);
+
+            BtnCreateCase.IsEnabled = false;
+            BtnUpdateCase.IsEnabled = false;
         }
 
         private void BtnCreateCase_Click(object sender, RoutedEventArgs e)
         {
-            CheckRecordsFrame.Navigate(typeof(Records.AddCase), userProfile, new DrillInNavigationTransitionInfo());
+            var parameterList = new List<string>()
+            {
+                userProfile,
+                checkRecord.RecordId.ToString(),
+            };
+
+            CheckRecordsFrame.Navigate(typeof(Records.AddCase), parameterList, new DrillInNavigationTransitionInfo());
         }
 
         private void BtnUpdateCase_Click(object sender, RoutedEventArgs e)
@@ -77,9 +90,10 @@ namespace Nexxon.Views.Records
 
                 if (recordsDialog.BResult == 1)
                 {
-                    var createCaseDialog = new CreateCaseDialog();
-                    await createCaseDialog.ShowAsync();
-                    this.Frame.Navigate(typeof(HomePage), null, new DrillInNavigationTransitionInfo());
+                    checkRecord.CustomerSearchCriteria = newRecord.CustomerIdNumber;
+                    Pivot_Records.SelectedItem = PI_CheckRecords;
+
+                    ASBAllRecords.Focus(FocusState.Programmatic);
                 }
                 else
                 {
@@ -208,7 +222,15 @@ namespace Nexxon.Views.Records
 
         private void LV_CheckRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string Message = "";
 
+            casesModel.IdCustomerRecord = Convert.ToInt32(LV_CheckRecords.SelectedValue);
+
+            BtnCreateCase.IsEnabled = true;
+
+            CasesViewModel casesViewModel = new CasesViewModel();
+
+            casesViewModel.SearchAllCustomerCases(ref casesModel, ref Message);
         }
     }
 }
